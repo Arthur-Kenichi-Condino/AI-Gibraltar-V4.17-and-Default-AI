@@ -1,0 +1,1698 @@
+=====================
+  Notas da Versão
+=====================
+  4º Lançamento
+=====================
+
+  POR FAVOR, ANTES DE INSTALAR ESTA NOVA VERSÃO, APAGUE TODOS OS ARQUIVOS DAS VERSÕES ANTERIORES
+
+---------------------
+  AI Gibraltar v4.0: primeira versão da nova AI. Em testes ainda, feedback dos usuários são bem-vindos.
+---------------------
+- Reescrita total dos arquivos "GibraltarAI4" e "Habilidades"
+- Correções e limpeza de códigos velhos nos outros arquivos
+- Homunculus persegue e ataca mais rapidamente, assim como o Assistente
+- Habilidades usadas mais rapidamente
+
+---------------------
+  AI Gibraltar v4.1: correções críticas após testar WoE.
+---------------------
+- Corrigido problema que poderia fazer com que o homunculus parasse e atacar o Emperium
+- Corrigido defeito que faria o homunculus ignorar comandos de ataque manuais
+- Corrigido defeito que impedia uso de habilidades de área com o comando reservado de Mover 
+- Agora, o homunculus/assistente no Modo Aguardar volta para esse modo após usar uma habilidade manualmente
+
+---------------------
+  AI Gibraltar v4.1.1: pequena modificação para assistentes
+---------------------
+- Assistentes não informam à AI que estão conjurando habilidades. O tempo de recarga deverá sempre ser aplicado
+
+---------------------
+  AI Gibraltar v4.1.2: pequena correção
+---------------------
+- Homunculus não seguia mestre ao ser configurado para atacar à distância. Isto foi corrigido
+
+---------------------
+  AI Gibraltar v4.2: correções no uso de habilidades e na detecção de KS. Melhora na detecção de inimigos
+---------------------
+- Ajuste no ataque à distância: homunculus segue o dono mais fielmente
+- Fúria Iluminada agora é usada automaticamente assim como Luz Salvadora
+- Tempo de re-uso de Convocação é desconsiderado caso o homunculus troque de alvo
+- No modo ataque à distância, Névoa Venenosa e Derretimento com Lava são usados na posição do homunculus
+caso o alvo esteja muito distante
+- Troca de alvos melhorada para adquirir o alvo mais próximo, principalmente quando Ataque à Distancia for ativado
+- Sistema anti-KS não mais detecta uso de habilidades no próprio monstro como KS (permitindo up AFK em Pessegueiras Encantadas)
+
+---------------------
+  AI Gibraltar v4.2.1: ajuste nas habilidades automáticas
+---------------------
+- habilidades automáticas que falharem mais que 5 vezes terão tempo de cooldown ativado, permitindo assim que habilidades que 
+realmente funcionem sejam usadas de forma prioritária
+
+---------------------
+  AI Gibraltar v4.3: correção na função de seguir o mestre
+---------------------
+- homunculus podia, por causa de um defeito, parar de seguir o mestre
+- agora, o homunculus evita trocar de alvo várias vezes seguidas, por causa de distâncias e movimentações
+
+---------------------
+  AI Gibraltar v4.3.1: correção na alteração que usa Comandos Reservados para usar habilidades em área
+---------------------
+- agora, o homunculus detecta corretamente duplo clique para usar habilidades em área de nível diferente
+
+---------------------
+  AI Gibraltar v4.3.2: ajuste no uso de habilidades do Bayeri
+---------------------
+- homunculus Bayeri não mais usa suas habilidades em nível aleatório
+
+---------------------
+  AI Gibraltar v4.3.3: pequena mudança na troca de inimigos
+---------------------
+- homunculus evita trocar de inimigo por pelo menos 15 s, para evitar "indecisão" que poderia ocorrer, fazendo com que
+ele ficasse indo de um lado para o outro.
+
+---------------------
+  AI Gibraltar v4.3.5: ajustes na movimentação do homunculus
+---------------------
+- melhora na previsão de movimento dos monstros, para o homunculus se mover à frente
+- correção de pequeno bug na AI que fazia o homunculus confundir monstros e atacar alguns indevidamente
+
+---------------------
+  AI Gibraltar v4.3.6: homunculus estava com um problema de "indecisão"
+---------------------
+- homunculus só tenta trocar de alvo após um período de tempo ou caso o inimigo esteja se movendo
+
+---------------------
+  AI Gibraltar v4.3.7: em casos de lag extremo do servidor, não é possível evitar travamento do homunculus, mas...
+---------------------
+- comando de atacar inimigo mais próximo é sempre realizado, mesmo fora do alcance. Assim, ele pode atacar inimigos, 
+evitando uma travada só de comandos de Mover.
+
+---------------------
+  AI Gibraltar v4.3.8: pequena modificação no sistema de registrar tipos de monstro pelo homunculus
+---------------------
+- o homunculus está sempre adicionando o tipo de monstro para que o assistente possa detectar. Assistentes por si só
+não conseguem detectar qual monstro estão atacando por causa de um defeito do jogo. Mas a lista está ficando cada vez
+maior, então limitei o número de entradas para 15000 (atualmente, estava em 9000). Caso você queira reiniciar a lista 
+ao mudar de mapa, delete os arquivos Types.lua (na pasta ID DATA) e TYPES.txt (pasta TEMP)
+
+---------------------
+  AI Gibraltar v4.3.10: pequena ajuda para a comunidade!
+---------------------
+- agora, a homunculus Sera e a Eira usam suas habilidades de cura caso estejam ociosas e jogadores sentem ao lado delas
+- Reduzido alcance do sistema "Aliados Temporários" para 2 células. O homunculus protege pessoas que não fazem nada dentro
+desse alcance (ficam paradas só levando dano)
+
+---------------------
+  AI Gibraltar v4.3.11: pequeno ajuste
+---------------------
+- homunculus podia, por algum motivo, ainda parar de seguir o mestre
+
+---------------------
+  AI Gibraltar v4.4: muitas coisas, muitas coisas...
+---------------------
+- sistema anti-lag, sim, mas... 
+-- é bom a AI mandar somente 1 comando por ciclo
+-- mas se o servidor travar, realmente não há o que fazer, o lag só afeta homunculi e assistentes, o resto do mapa 
+funciona
+-- então não tem necessidade de manter o delay entre comandos (se der lag, já era, mesmo... Só dá pra Vaporizar o
+mais rápido possível antes que trave o jogador com a "lista de espera" de comandos)
+
+- ao remover o pequeno delay entre comandos, a AI está mais rápida
+
+- novo sistema de "recuar para usar habilidade" adicionado:
+-- homunculus/assistente, de 6 em 6 s, tenta ir para longe para usar habilidades
+-- assim, o monstro não quebra sua conjuração
+-- isso ajuda muito o Bayeri, principalmente, e também a Eira e a Sera
+-- não é utilizado em monstros marcados pelo comando de Atacar do homunculus
+-- não é utilizado por 12 s depois de usar habilidades de área automaticamente
+-- detalhes de como ativar/desativar no manual
+
+- pequenas correções para evitar lag:
+-- homunculus só tenta se mover repetidamente para nova posição se o alvo, o mestre, o homunculus ou um aliado 
+estiverem se mexendo
+-- caso contrário, não é feito um comando aleatório, mas o mesmo anterior, evitando uma falsa impressão de "dancing"
+que era causada pelo travamento do servidor
+
+- homunculus só tenta 2 vezes (ao invés de 4, anteriormente) usar uma mesma habilidade antes de colocá-la em 
+cooldown (recarga) mesmo com falha na detecção de uso
+
+---------------------
+  AI Gibraltar v4.5: OMG, lag demais!
+---------------------
+- OK, ter removido o delay entre comandos foi um acerto, MAS o lag podia voltar com tudo no homunculus:
+-- então eu percebi que era só preciso detectar se o homunculus começou a se mover depois de um comando de movimento
+para ver se o jogo travou por lag ou não
+-- então agora o homunculus só pula ciclos da AI se ele detectar que seu comando falhou
+
+- modificação no uso de habilidades:
+-- agora, o tempo entre uso de habilidades pela AI é o de 1 s (do jogo), ao invés de 3 s.
+-- era 3 s porque senão a AI tentava usar Capricho, daí tem o tempo de recarga global do nosso servidor que trava as 
+outras habilidades e o homunculus só soltaria Capricho
+-- então agora, a cada 3 habilidades, o homunculus vai usar o tempo de recarga global de 3 s, pra que o Capricho não 
+trave a AI
+-- mas entre as outras habilidades, vai ficar usando 1 s, mesmo
+
+- Ou seja, o uso de habilidades ficou mais rápido!
+
+- Corrigidos valores de pós-conjuração usados no database da AI
+
+- Agora o homunculus detecta se tem Capricho ou outras habilidades de longo alcance! Êêêê!! (Sistema de detecção 
+descoberto pelo jogador Dr. Azzy (iRO), da Azzy AI):
+-- mas só dá pra detectar algumas habilidades... :c(
+-- Capricho, Choque Supersônico, Onda Supersônica, Ponto da Paralisia, Névoa Venenosa, Derretimento com Lava, 
+Impacto Preciso, Illuminatus.
+
+---------------------
+  AI Gibraltar v4.5.1: oops...
+---------------------
+- ajuste pequeno para homunculus perseguir e alcançar o inimigo e não só ficar travado atrás dele
+
+---------------------
+  AI Gibraltar v4.5.4: Eleanor com mais Garras
+---------------------
+- agora, a AI tem 65% de chance de reutilizar Garra Supersônica, ao invés de tentar outra habilidade
+- correção para uso de habilidades de combo. Habilidade marcada para uso em seguida estava sendo substituída por
+outra
+- erro que poderia deixar o homunculus lerdo ao perseguir persistiu por causa de outro problema
+
+---------------------
+  AI Gibraltar v4.5.5: pequeno erro resolvido
+---------------------
+- movimentação do homunculus ainda estava travada. Estou tentando resolver o mais rápido possível, mas às vezes ainda
+ocorria
+
+---------------------
+  AI Gibraltar v4.5.6: ufa, agora acho que deu...
+---------------------
+- mais uma vez, o erro do homunculus ficar lerdo apareceu de repente. Atualizando com correção
+
+---------------------
+  AI Gibraltar v4.6: chega de indecisões!
+---------------------
+- modificação na função de adquirir inimigos. Agora, o homunculus evita ficar indo de um lado para o outro tentando 
+atacar um inimigo pelhor
+
+- persiga como se não houvesse amanhã! 
+-- ajuste na movimentação do homunculus para evitar que ele fique fazendo ziguezague na hora de perseguir
+
+- ajuste no sistema anti-lag para evitar que o homunculus, em mapas travados, fique fazendo ziguezague eterno e não 
+ataque o monstro nenhuma vez
+
+---------------------
+  AI Gibraltar v4.6.2: pequenas alterações
+---------------------
+- limpeza de código velho na detecção de alvos da tela
+- pequenas correções na movimentação
+- pequenas correções no sistema anti-lag
+
+---------------------
+  AI Gibraltar v4.6.3: desempenho
+---------------------
+- ajuste que melhor um pouco o desempenho geral de movimentação
+
+---------------------
+  AI Gibraltar v4.7: opa, deu ruim...
+---------------------
+- homunculus poderia parar de usar habilidades totalmente após um período de tempo. Não sei se foi reparado porque é 
+MUITO RARO acontecer. Daí é só vaporizar e criar novamente
+-- como não dá pra saber se foi reparado ou não, coloquei um timer de 30 s. Se nenhuma habilidade for utilizada em 30 s,
+todas as marcações que possivelmente impeçam o uso de habilidades são reiniciadas
+
+- habilidade de Convocação da Sera agora só é usada quando o mestre tem pelo menos 80% de HP ou teve gesto de receber 
+dano ou de atacar (para caso um dia as abelhas realmente ataquem o bioquímico)
+
+- adicionada para uso automático a Armadura de Granito se o HP do mestre E do homunculus estejam em 100%
+
+- Brisa da Calmaria agora é usada automaticamente no mestre se ele se sentar e a Eira estiver ociosa. Também é usada no 
+inimigo ao atacar
+
+- pequena alteração na movimentação do homunculus para tentar prever melhor a posição futura do alvo ao perseguir
+
+- adicionadas habilidades de buff ou debuff de assistentes para uso automático
+
+---------------------
+  AI Gibraltar v4.7.1: ...e morreu
+---------------------
+- remoção do uso automático de Armadura de Granito, que poderia matar o jogador durante o up AFK
+
+---------------------
+  AI Gibraltar v4.7.2: ajuste
+---------------------
+- mais um pequeno aprimoramento para movimentação de homunculus
+
+---------------------
+  AI Gibraltar v4.7.4: proteção para homunculus não sair da tela
+---------------------
+- monstros que atacam à distância fazem o homunculus se mover automaticamente até eles raramente, sem nenhum comando da AI
+-- então, agora, se o homunculus estiver indo para o canto da tela, a AI manda ele voltar para perto
+
+- ajuste na perseguição de alvos
+
+---------------------
+  AI Gibraltar v4.7.5: movimentação
+---------------------
+- pequeno ajuste para que o sistema anti-lag não trave o homunculus
+
+---------------------
+  AI Gibraltar v4.7.6: proteção para homunculus não sair da tela
+---------------------
+- a detecção de distância da proteção para o homunculus não sair da tela estava errada
+
+---------------------
+  AI Gibraltar v4.7.7: movimentação
+---------------------
+- mais alguns pequenos ajustes para melhorar a movimentação
+
+---------------------
+  AI Gibraltar v4.7.8: 
+---------------------
+- uso de Sede de Sangue automático agora é em chance de 25% ao invés de 5%
+-- pendente para próxima atualização resolver um problema em que Fortaleza pode atrapalhar o uso automático da Sede
+
+- mais ajustes na movimentação
+
+---------------------
+  AI Gibraltar v4.8: 
+---------------------
+- chance de uso de Sede de Sangue automático aumentada mais um pouco
+-- Sede de Sangue não é usada automaticamente em homunculi S pois no nosso servidor o delay da habilidade bloqueia todas as outras
+
+- homunculus tenta se mover mais uma vez quando troca de estado de perseguir para atacar quando o inimigo está se movendo. Assim,
+ele não fica tentando atacar atrás do monstro quando o monstro já andou mais um pouco, e o ataque falha
+
+- melhorias na previsão de movimentos de inimigos
+-- homunculus tenta se mover à frente do alvo, mas só quando ele está se movendo. Se estiver parado, também tenta, mas a distância 
+será no máximo o alcance de ataque: com isso, o homunculus não faz mais tanto ziguezague quanto antes ao perseguir
+
+- comandos de Ataque agora são realizados na função de Perseguir e são realizadas no começo de Atacar, para tentar atingir um inimigo 
+o mais rápido possível com golpes
+
+- criado timer de 4 s após criar o homunculus para não usar nenhuma habilidade e evitar ficar usando várias vezes 
+enquanto o jogador dá teletransporte
+
+---------------------
+  AI Gibraltar v4.8.1: 
+---------------------
+- pequeno erro ainda poderia causar efeito de "ziguezague" ao perseguir
+
+---------------------
+  AI Gibraltar v4.8.3: 
+---------------------
+- arrumando mais um pouco a movimentação
+- e tentando corrigir um erro que poderia deixar o homunculus parado por algum tempo (testando se funcionou)
+
+---------------------
+  AI Gibraltar v4.8.4: 
+---------------------
+- removida parte de código velho que podia fazer o homunculus atacar um alvo inválido
+
+---------------------
+  AI Gibraltar v4.8.5: 
+---------------------
+- reduzido tempo mínimo necessário para troca de alvo do homunculus de 15 s para 5 s.
+
+---------------------
+  AI Gibraltar v4.8.8: 
+---------------------
+- tempo para troca de alvo aumentado para 16 s (para o homunculus não ficar indeciso: achei que tinha passado, 
+mas voltou).
+- eu não sei o que acontecia às vezes, mas o homunculus parava de atacar por algum tempo. Então coloquei uma 
+prioridade no comando de Atacar em alguns ciclos durante o estado de Ataque.
+- ajustei o timer de não usar habilidades por 4 s depois que o homunculus aparece para que ele não fique usando 
+várias habilidades enquanto o bioquímico usa teletransporte, que não estava sendo respeitado.
+
+---------------------
+  AI Gibraltar v4.8.10: 
+---------------------
+- proteção para homunculus não sair da tela por causa do bug do jogo em ataques à distância, como orcs arqueiros, 
+era ignorada em alguns casos. Mas até a Gravity consertar o problema do homunculus se mexer sozinho sem comandos 
+da AI, não é 100% seguro deixar afk em mapas com monstros que atacam à distância
+- pequenos ajustes para evitar ziguezagues
+
+---------------------
+  AI Gibraltar v4.8.11: 
+---------------------
+- corrigido pequeno problema que não permitia refrescar tempos de recarga de habilidades ao mudar de alvo
+
+---------------------
+  AI Gibraltar v4.8.13: 
+---------------------
+- colocados filtros nos comandos de ataque para evitar que o homunculus tente atacar alvos que já morreram. Talvez
+isso ajude um pouco as abelhas invocadas pela Sera a não travarem no lugar sem ação (elas são controladas pelo
+servidor, e não pela AI).
+- correções no modo como o homunculus troca de alvo. Ele prioriza os alvos com ID do tipo mais alto, tenta atacar alvos 
+do alquimista primeiro, depois dele mesmo e então de amigos. Mas para trocar alvos no modo agressivo, o alvo tem que
+se mover ou o tempo desde o começo do ataque tem que ser pelo menos 10 s
+- com a ajuda do jogador Sushi, ajustados usos automáticos de habilidades do assistente Diabolik
+
+---------------------
+  AI Gibraltar v4.8.15: 
+---------------------
+- habilidade da Eira agora é reutilizada após 1 s em jogadores sentados perto da homunculus enquanto ela estiver ociosa
+(a homunculus Sera usa analgésico só após a duração acabar)
+- aumentado tempo para ignorar inimigos que não reagem a ataques (e podem estar travados por algum bug) para 20 s
+
+---------------------
+  AI Gibraltar v4.9: 
+---------------------
+- Intervalo de uso de Brisa de Calmaria em aliados sentados perto da Eira enquanto ociosa aumentado para 3 s
+
+- Implementado uso automático de Quebra-Costelas da Eleanor
+
+- correção de erro de programação que impedia que a AI detectasse o estilo de luta da Eleanor correto:
+-- agora, caso Quebra-Costelas ou Garra Supersônica falhe, a AI troca para o outro estilo para usar habilidades
+-- a habilidade Estilo de Luta NÃO é utilizada automaticamente pois a verificação de habilidades pode falhar várias vezes
+e não é totalmente estável, então Eleanor poderia perder muito tempo tentando trocar de estilo
+-- o jogo não passa informação alguma à AI de que habilidades que não precisam de alvo (como Cura pelas Mãos, Bater em Retirada, 
+Esforço Mental, Bênção Caótica, Estilo de Luta, Tremor de Fogo, Vôo Frenético, etc.) foram utilizadas. Portanto, a AI nunca saberá 
+exatamente qual o estilo de luta atual da Eleanor e precisa tentar usar habilidades dos dois estilos e trocar o estilo caso
+alguma falhe
+
+- Correções nos combos da Eleanor:
+-- Garra Supersônica é usada no modo "Lutar"
+-- Garra Supersônica tem 90% de chance de ser reutilizada quando o detectado sucesso no uso anterior
+-- caso não seja usada, Eleanor tenta começar o combo de Garras Supersônicas -> Rastro Brilhante -> Delírio Noturno
+em 35% de chance. Cada habilidade tem 95% de chance de ser utilizada
+-- caso Eleanor complete o combo, há 85% de chance de Eleanor utilizar Garras Supersônicas novamente
+-- Quebra-Costelas será utilizada automaticamente quando Eleanor estiver no modo "Agarrar"
+-- caso Quebra-Costelas seja usada com sucesso e detectada pela AI, Eleanor tem 95% de chance de utilizar as
+próximas habilidades do combo
+
+-- nota: a AI verifica o uso de SP para detectar se habilidades funcionaram, mas o jogo às vezes não mostra a variação 
+a tempo e a detecção falha
+
+---------------------
+  AI Gibraltar v4.9.1: 
+---------------------
+- corrigido problema em que homunculus poderia travar em um mesmo alvo caso ficasse trocando entre o estado Atacar e Perseguir
+
+---------------------
+  AI Gibraltar v4.9.4: 
+---------------------
+- agora o homunculus Dieter usa Cinzas Vulcânicas em 30% de chance a cada vez que ataca ao invés de 100% de chance. 
+Alteração para diminuir a freqüência a pedido do membro do clã Rylai. Obrigado pelo feedback! :cD
+
+- homunculus agora só mede a alteração de SP de uso de skills quando termina conjurações. Isso pode ajudar a melhorar a detecção 
+de uso de skills
+
+- detecção de uso de skills agora também tenta detectar o gesto de Usar Habilidade
+
+---------------------
+  AI Gibraltar v4.9.8: 
+---------------------
+- habilidades não são utilizadas caso o homunculus tenha acabado de mudar de estado, evitando uso desnecessário de habilidades
+de área, por exemplo, na posição do homunculus enquanto ocioso caso ele já tenha começado a perseguição
+
+- implementado sistema (em testes) de mover o homunculus para longe de inimigos caso esteja com HP baixo ("MODO DESESPERO"):
+-- esse sistema é considerado parte do sistema de "RECUAR PARA HABILIDADES": ou seja, é desativado junto com ele (vide manual
+do usuário)
+-- homunculus entra no "modo desespero" quando estiver com porcentagem HP menor que 40%
+-- a lógica é a seguinte: o homunculus vai morrer, mesmo, então ele deve tentar de tudo a partir de agora
+-- durante o AFK, várias habilidades normalmente não são utilizadas, e o HP do homunculus deve permanecer na faixa 60-90% para
+ser considerado um up seguro sem assistência do bioquímico
+-- portando, 40% de HP significa que algo deu errado (Galho Seco? Galho Sangrento?)
+
+- as seguintes características agora funcionam no "modo desespero":
+-- homunculus passa a usar as seguintes habilidades automaticamente:
+-- Esquiva Especial
+-- Armadura de Granito, Tremor de Fogo
+-- Raiva Iluminada
+
+- o homunculus se comporta da seguinte maneira no modo desespero: (só entra nesse modo a cada 12 s)
+-- mínimo de 50% de SP para usar habilidades automaticamente é ignorado
+-- vai para longe do inimigo aleatoriamente, sempre que ele se aproximar, por 3 vezes
+-- depois disso, fica no lugar para recuperar HP e SP por 6 s 
+-- caso o inimigo ataque à distância e o homunculus seja atingido, o modo é cancelado automaticamente
+-- se o inimigo atacar o mestre ou o homunculus trocar de inimigo, o estado é cancelado
+-- o homunculus usa habilidades normalmente e reage a ataques o tempo todo
+-- depois dos 6 s, o ciclo se repete
+
+---------------------
+  AI Gibraltar v4.9.10: 
+---------------------
+- homunculus não para de fugir mais tão facilmente ao levar dano logo após tentar se afastar (ainda em testes)
+
+- agora o homunculus usa névoa venenosa, derretimento com lava e onda supersônica o mais rápido possível quando estiver no 
+modo desespero
+
+---------------------
+  AI Gibraltar v4.10: 
+---------------------
+- corrigido problema que poderia fazer o homunculus fugir dos monstros e parar de ajudar o jogador
+
+---------------------
+  AI Gibraltar v4.10.3: 
+---------------------
+- homunculus agora tenta sair do movo Evasão caso esteja bloqueado por algum obstáculo
+
+- habilidades especiais no modo Evasão são utilizadas mais rapidamente caso alguma prioritária não esteja disponível
+
+- contagem de inimigos em volta do mestre ou do homunculus melhorada. Antes só levava em conta inimigos com gesto de ataque
+no momento. Agora também conta inimigos que já atacaram pelo menos uma vez mas não estão atacando no frame atual
+
+---------------------
+  AI Gibraltar v4.10.4: coisinha pequena mas importante
+---------------------
+- homunculus dava uma pequena travadinha ao recuar para usar habilidades e nem sempre as usava. Isso foi corrigido nesta versão
+
+---------------------
+  AI Gibraltar v4.10.5: opa
+---------------------
+- travadinha permaneceu ainda algumas vezes (ainda em testes para ver se foi solucionado completamente)
+
+---------------------
+  AI Gibraltar v4.11: modo evasão e habilidades
+---------------------
+- mais habilidades configuradas para uso prioritário no modo evasão
+
+- evasão agora começa com HP em 80% (40% não dava tempo de fazer nada, o homunculus já estava praticamente morto):
+-- homunculus começa a usar habilidades especiais e tem o limite de SP para uso automático de habilidades reduzido para 10%
+
+- algumas habilidades programadas para o modo evasão não estavam sendo utilizadas corretamente (não estavam registradas como 
+disponíveis)
+
+- algumas habilidades do homunculus Bayeri não estavam sendo usadas porque estavam marcadas como indisponíveis
+
+- homunculus agora sai do modo evasão para ajudar o mestre caso já esteja longe
+
+- cinzas vulcânicas agora só tem 3% de chance de ser utilizada (a pedido do membro do clã Rylai)
+
+- a lista de habilidades disponíveis em Skills.lua foi reorganizada para a AI começar a usar habilidades pelas mais importantes
+
+- se o homunculus é do tipo Bayeri e está perdendo HP no modo ocioso e usou Raiva Iluminada automaticamente, ele tenta cancelar
+o uso usando a habilidade novamente
+
+- melhora no sistema de recuar para usar habilidade (mais vezes e mais eficiente)
+
+- homunculus considera o uso de Armadura de Granito e Tremor de Fogo como sucesso sempre, mesmo que falhe, ignorando testes de SP 
+e gestos da AI. Isso evita que ele tente usar novamente caso o uso tenha sido realmente com sucesso mas a AI tenha detectado como 
+falha (falha na detecção de alteração do SP ou gesto de receber dano durante conjuração)
+
+---------------------
+  AI Gibraltar v4.11.1: 
+---------------------
+- agora, o homunculus só entra no modo evasão se também estiver com a porcentagem de HP menor que a necessária para ficar agressivo.
+Isso quer dizer que se ele está abaixo de 80%, mas está ainda na ativa para ficar agressivo, ele não vai fugir do inimigo
+
+---------------------
+  AI Gibraltar v4.11.4: 
+---------------------
+- corrigido erro de digitação na função de detectar inimigos que poderia em alguns casos gerar resultados inesperados
+
+- agora, o homunculus tenta detectar inimigos que acabaram de sair de furtividade ou esconderijo e tenta usar habilidades rapidamente
+contra eles, caso esteja marcado como agressivo para todos ou para aquele inimigo
+
+---------------------
+  AI Gibraltar v4.12: 
+---------------------
+- correção de erro fatal que poderia ocorrer na função Snipe (recuar para usar habilidade)
+
+---------------------
+  AI Gibraltar v4.12.2: 
+---------------------
+- Onda Supersônica agora é usada em nível aleatório
+
+- Eleanor tenta usar o combo de Quebra-Costelas mesmo que a detecção de uso de habilidade falhe, pois a verificação de variação de SP 
+nem sempre funciona.
+
+---------------------
+  AI Gibraltar v4.12.3: 
+---------------------
+- a movimentação no "modo desespero" só é feita se o homunculus estiver longe do dono
+
+---------------------
+  AI Gibraltar v4.13: 
+---------------------
+- comando de Usar Habilidades agora é sempre enviado como prioritário na seqüencia de comandos da AI (passando na frente de
+Atacar e Mover):
+-- isso quer dizer que as habilidades são usadas mais rapidamentes, melhorando muito o desempenho dos homunculi!
+
+- Convocação não mais requer que o mestre tenha 80% de HP disponível
+
+- Armadura de Granito agora requer que o mestre e o homunculus tenham pelo menos 50% de HP
+
+- Raiva Iluminada só é usada automaticamente se o homunculus tiver menos que 25% de HP
+
+- o "modo desespero" foi melhorado:
+-- agora, começa a funcionar no 60% de HP do homunculus
+-- guarda 20% do SP ao invés de 50%. O homunculus guarda SP para que o mestre possa usar buffs ou outras magias de sua preferência 
+em caso de emergência
+-- a movimentação para longe do monstro só ocorre caso o homunculus esteja a pelo menos 4 células distante do mestre, caso contrário ele 
+permanece na posição (isso evita juntar mobs desnecessários)
+-- pode ser desativado da mesma forma (e juntamente) com o modo "Recuar para Usar Habilidade" (ver manual)
+-- não é usado em monstros que o mestre mandou atacar manualmente (assim, é simplesmente desativado para aquele monstro até o homunculus 
+morrer ou sair da tela ou o monstro morrer): isso permite que o homunculus não se mova para MVPs simplesmente com o comando Atacar do 
+jogador
+
+---------------------
+  AI Gibraltar v4.13.1: 
+---------------------
+- valor incorreto na distância máxima para movimentação de homunculus corrigido
+
+---------------------
+  AI Gibraltar v4.13.2: 
+---------------------
+- sistema de mover para remover bug position não estava funcionando corretamente
+
+---------------------
+  AI Gibraltar v4.13.4: 
+---------------------
+- habilidades agora estão configuradas em uma "ordem de importância", para que ofensivas sejam usadas antes de buffs, e conjurações 
+instantâneas sejam usadas primeiro (para matar o inimigo mais rápido, caso disponíveis). 
+
+- método para evitar que o homunculus saia da tela melhorado, com o comando de Mover atravessando o filtro de comandos.
+
+---------------------
+  AI Gibraltar v4.13.5: 
+---------------------
+- o problema do delay global no nosso servidor atrapalha o uso de habilidades de homunculus S e inicial ao mesmo tempo pois é 
+necessário ajustar o tempo exato para o próximo uso somente para determinadas habilidades, e isso é muito chato... Nesta 
+atualização, tento corrigir o problema para pelo menos Pica-Pau e Capricho.
+
+---------------------
+  AI Gibraltar v4.13.6: 
+---------------------
+- tentando fazer com que Eleanor use mais Garras Supersônicas. Ainda não está confirmado se funciona.
+
+---------------------
+  AI Gibraltar v4.14: 
+---------------------
+- Garras Supersônicas da Eleanor agora tem prioridade máxima sobre o uso de outras habilidades.
+
+- agora, quando uma habilidade falha no uso, o homunculus verifica se a habilidade anterior foi Capricho ou Pica-Pau; se
+foi uma delas, o homunculus tenta usar de novo a habilidade depois de 3 s ou 2 s respectivamente.
+
+- homunculus não mais fica agressivo para clones de Kagerou ou Oboro (só reage)
+
+- toda vez que uma Eira leva dano, agora, o tempo que resta para usar Esquiva Especial novamente é reduzido pela metade
+
+- se um monstro/jogador usar habilidade ou começar a conjurar uma habilidade, Brisa da Calmaria tem seu tempo de duração ignorado 
+para ser utilizada novamente
+
+- Brisa da Calmaria agora tem prioridade sobre as habilidades de homunculi iniciais, para silenciar rapidamente o próximo 
+alvo/inimigo. 
+
+- várias habilidades tiveram prioridade alterada, além de Garras e Brisa, para que o homunculus use habilidades de maior dano
+primeiro e de pouco dano depois
+[modificações com ajuda do membro do clã Rylai]
+
+- Analgésico, Esquiva Especial e Brisa da Calmaria tiveram a duração programada para um valor mais baixo do real para que sejam usadas 
+novamente antes que o tempo acabe
+
+[a pedido do membro do clã Rylai para que o homunculus só fique agressivo com determinada quantia de SP, criei um método para
+melhorar o up, descrito abaixo]
+- agora o homunculus tem um SP mínimo de 60% para atacar agressivamente (para Eleanor, por exemplo, atacar os Magmarings com SP 
+suficiente para matar com duas a três Garras), MAS também fica agressivo caso o SP esteja acima de 30% e o HP esteja maior que o
+necessário para entrar no "modo desespero" (60%*). O que isso quer dizer? Segue a explicação:
+
+*se o valor para ficar agressivo for menor que 60%, os valores se igualam
+
+-- o homunculus sempre vai guardar 20% do SP, independente de sua situação, para que o jogador sempre tenha o suficiente para usar Esquiva 
+Especial, Tremor de Fogo ou Analgésico, por exemplo
+
+-- o homunculus guarda 50% do SP para que 30% seja usado até o 20% caso ele entre no modo "desespero"
+
+então...
+
+-- o homunculus vai ficar agressivo normalmente com 60% de SP ou mais
+
+-- se ele estiver com menos de 60%, mas com HP suficiente e mais que 30% SP, vai tentar atacar o monstro.
+
+-- caso o HP fique abaixo do necessário e entre no modo "desespero", ele ainda tem uma reserva de 40% do SP (até os 20%) 
+para usar no monstro e matar rapidamente
+
+por isso, resumindo...
+
+-- para os homunculi em geral, nada vai mudar no up
+
+-- mas caso v'c' esteja em um mapa de up difícil, o homunculus vai ter que guardar pelo menos 30% (20% + 10%) de SP para
+gastar 10% em habilidades e não perder muito HP
+
+---------------------
+  AI Gibraltar v4.14.2: pequenos ajustes
+---------------------
+- Esquiva Especial agora tem um tempo mínimo para ser usada novamente de 30 s, mesmo que a homunculus leve dano. Isso impede que
+ela fica usando várias vezes caso o monstro consiga acertá-la mesmo com 500 de esquiva
+
+- O sistema de tentar usar a habilidade anterior novamente caso falhe agora também leva em conta Bênção Caótica, junto com Capricho 
+e Pica-Pau
+
+---------------------
+  AI Gibraltar v4.15: buffs de homunculus iniciais, modo AFK e mais!
+---------------------
+- manual de instruções atualizado para as novas configurações da AI!
+
+- agora é possível deixar os homunculi usarem os buffs da forma inicial (Vôo Frenético, Bater em Retirada, 
+Fortaleza e Sede de Sangue) automaticamente. Verifique no manual as instruções!
+-- elas só serão usadas quando o homunculus tiver pouco SP restante e já tenha gasto o resto com outras habilidades.
+
+- agora o homunculus detecta se o mestre não teve nenhum gesto de atacar ou usar habilidades, e depois de um tempo marca como o
+jogador estando AFK:
+-- se o modo de uso de habilidades do homunculus estiver marcado como "usar buffs de homunculi iniciais" (descrito acima), agora 
+o homunculus se move para uma posição aleatória enquanto ocioso, a cada 30 s. [removido]
+-- se o homunculus for um Amistr, ele vai usar Troca de Lugar, fazendo com que o jogador se mova pelo mapa. [removido]
+-- fora isso, esse modo ainda não tem outras configurações. 
+
+- homunculus agora pode desativar o modo Evasão sem desativar "ir para longe para usar habilidade". Verifique no manual como
+configurar!
+
+- corrigido uso de Troca de Lugar, que tinha uma chance quase impossível de ser utilizada (ainda em testes):
+-- o gesto de levar dano era verificado só no instante de usar a habilidade, então era quase impossível que acontecesse
+ao mesmo tempo
+-- a distância para uso automático continua 1, ou seja, o mestre precisa de estar do lado do homunculus. Isso evita que o
+homunculus te jogue num mob ou num MVP
+
+- a pasta ID DATA serve para você verificar quais habilidades estão ativas. Quando configurações são alteradas, arquivos são 
+criados ou apagados
+
+---------------------
+  AI Gibraltar v4.15.1: 
+---------------------
+- buffs de homunculi iniciais não estavam sendo usados por homunculi S em alguns casos
+
+- a configuração da atualização anterior foi alterada novamente! Verifique no manual por instruções:
+-- o modo de usar as habilidades é o mesmo da atualização anterior (ciclo de 3 modos, vide manual):
+MAS a configuração não mais interfere no modo como o Amistr usa Troca de Lugar para mover o jogador pelo mapa enquanto AFK
+-- o modo de uso de "recuar para usar habilidade" também é o mesmo (ciclo de 3 modos, vide manual)
+
+- o que foi alterado:
+-- agora, o método de viajar pelo mapa usando Troca de Lugar durante o AFK é uma configuração própria:
+-- para ativar, use Mover para a posição do mestre enquanto ele estiver SENTADO.
+-- se ele estiver EM PÉ, a configuração alterada é a de não perseguir o inimigo (Long Range Shooter)
+
+- como funciona:
+-- homunculus se move para uma posição aleatória enquanto ocioso, a cada 30 s. 
+-- se o homunculus for um Amistr, ele vai usar Troca de Lugar, fazendo com que o jogador se mova pelo mapa. 
+
+---------------------
+  AI Gibraltar v4.15.2: 
+---------------------
+- consertando o sistema de utilizar a habilidade novamente caso a anterior tenha sido Pica-Pau ou Capricho (ou Bênção Caótica);
+que atrapalham as habilidades dos homunculi S assim como os buffs (Vôo Frenético, Vôo Acelerado, Sede de Sangue, Fortaleza e
+Esforço Mental)
+
+---------------------
+  AI Gibraltar v4.15.3: 
+---------------------
+- agora, buffs de homunculi iniciais são usados só quando o mestre está AFK (mais de 1 min sem se "mexer": atacar, usar habilidades
+ou trocar de posição)
+
+- correção no sistema de usar Troca de Lugar para mover o mestre: o homunculus agora ignora a mudança de posição do mestre e continua
+no modo AFK para não precisar esperar 1 min novamente sem o mestre se mover
+
+---------------------
+  AI Gibraltar v4.15.6: 
+---------------------
+- agora Cinzas Vulcânicas é usada mais vezes [20% de chance] a pedido de alguns usuários. 
+
+- agora, mudar configurações de habilidades ou de se afastar para usar habilidades faz o homunculus se mover para exibir a configuração.
+Veja no manual como funciona!
+
+- atualizado manual do usuário.
+
+- Brisa da Calmaria agora tem prioridade sobre Capricho.
+
+- revertida configuração que fazia o homunculus usar buffs somente enquanto AFK (isso podia fazer com que eles demorassem muito
+para usar as habilidades)
+
+- corrigido problema que podia fazer com que o modo AFK não fosse ativado. Itens de autoconjuração fazem o jogador ter gesto de usar
+habilidades. Então gestos de usar habilidades agora são ignorados.
+
+---------------------
+  AI Gibraltar v4.15.7: 
+---------------------
+- correção para que o homunculus tente se aproximar do dono usando posição aleatória caso não consiga se mover diretamente à posição
+(quando o homunculus leva dano de monstros de fora da tela enquanto ocioso)
+
+---------------------
+  AI Gibraltar v4.15.9: 
+---------------------
+- corrigido problema com Troca de Lugar; era para o homunculus usar novamente e impedir que o mestre saia de sua posição, mas isso não 
+acontecia por causa de um erro de programação
+
+- Troca de Lugar sendo usada para navegar pelo mapa poderia não ocorrer por causa da programação de que a habilidade deve ser usada 
+novamente para reverter a posição do usuário para a original. Agora isso é ignorado somente no modo "navegar pelo mapa" com Troca de 
+Lugar.
+
+---------------------
+  AI Gibraltar v4.15.12: 
+---------------------
+- corrigido problema que poderia fazer Armadura de Granito ou Raiva Iluminada serem usados enquanto o homunculus estivesse ocioso.
+
+- agora, homunculus tenta usar Brisa da Calmaria rapidamente caso o inimigo seja um jogador ou outro homunculus
+
+- pequenas correções no uso de habilidades
+
+---------------------
+  AI Gibraltar v4.15.14: 
+---------------------
+- Esquiva Especial automática pode ser desativada colocando a configuração "Recuar para Usar Habilidade" no modo 2
+
+- aumento na chance de uso de Cinzas Vulcânicas
+
+---------------------
+  AI Gibraltar v4.15.15: 
+---------------------
+- Esquiva Especial agora só é utilizada automaticamente caso o bioquímiuco tenha pelo menos 55% de SP, para ele tenha 
+pelo menos 5% de SP a ser usado em Furtividade durante o UP AFK (e o SP não vá direto para 0 quando a Esquiva acaba)
+
+- Esquiva Especial agora é usada assim que o homunculus estiver com HP menor que o necessário para ficar agressivo
+
+- tempo mínimo entre re-usos de Esquiva Especial reduzido para 15 s (para que a Eira não spam'e a habilidade e acabe com 
+o SP rapidamente).
+
+---------------------
+  AI Gibraltar v4.15.16: 
+---------------------
+- sistema de tentar utilizar habilidade novamente mais uma vez caso falhe agora engloba outras habilidades que tenham 
+pós-conjuração maior que 1 s e menor que 10 s. Assim, algumas outras habilidades, como Choque Supersônico, que poderiam
+atrapalhar a habilidade seguinte por causa da configuração do nosso servidor terão o intervalo de tempo de bloqueio
+de habilidades respeitado.
+
+---------------------
+  AI Gibraltar v4.15.17: 
+---------------------
+- sistema de tentar utilizar habilidade novamente mais uma vez caso falhe agora engloba outras habilidades que tenham 
+pós-conjuração maior que 1 s e menor que 10 s. Assim, algumas outras habilidades, como Choque Supersônico, que poderiam
+atrapalhar a habilidade seguinte por causa da configuração do nosso servidor terão o intervalo de tempo de bloqueio
+de habilidades respeitado.
+
+---------------------
+  AI Gibraltar v4.15.18: 
+---------------------
+- Esquiva Especial agora aguarda 60% do SP para ser utilizada novamente, para que pelo 10% do SP do mestre sejam reservados
+
+- Esquiva Especial não é mais usada novamente caso a conjuração seja quebrada, obrigatoriamente, pois poderia acabar com o SP
+do mestre caso funcionasse e o gesto de receber dano fosse recebido mesmo assim, causando falsa impressão de quebra de conjuração
+
+---------------------
+  AI Gibraltar v4.15.20: 
+---------------------
+- a pedido de um jogador, Esquiva Especial agora é usada indiscriminadamente, para manter o UP AFK funcional.
+
+---------------------
+  AI Gibraltar v4.16: ajudando os usuários de Eleanor \o/
+---------------------
+- desabilitado Pica-Pau para Eleanor (porque não é necessário já que ela já possui habilidades de combo; pelo menos enquanto
+não conserto um erro que está fazendo Pica-Pau bloquear as outras habilidades)
+
+- desabilitado Capricho e Bênção Caótica para Eleanor enquanto ela está no estado de Ataque
+
+- limpeza de código velho e redundâncias no arquivo Habilidades.lua
+
+- atualizado manual do usuário
+
+---------------------
+  AI Gibraltar v4.16.1: tentando resolver problemas com a Eleanor \o/
+---------------------
+- tentando corrigir problemas em que Eleanor não consegue usar o combo
+-- agora ela irá usar após 1,5 s ao invés de 1 s
+
+---------------------
+  AI Gibraltar v4.16.2: ajustes pequenos para melhorar visualização de configurações
+---------------------
+- Eleanor agora consegue usar os combos automaticamente corretamente após 1 s (corrigido um bug no arquivo Habilidades.lua)
+
+- agora o Bayeri não vai tentar usar Raiva Iluminada enquanto ocioso para tentar desativar habilidade (não encontro em lugar
+algum se usar novamente cancela a duração, então melhor deixar o tempo acabar sozinho, pois poderia reiniciar a contagem)
+
+- homunculi agora não se movem no primeiro comando Aguardar caso já estejam próximos ao mestre, permitindo uma melhor 
+visualização de alteração de configurações de uso de habilidades no segundo comando Aguardar
+
+---------------------
+  AI Gibraltar v4.16.3: 
+---------------------
+- habilidades à distância ainda não disponíveis para os homunculi agora não serão mais comandadas até que eles as aprendam
+
+- homunculus não mais irá tentar se mover para longe para usar Capricho
+
+---------------------
+  AI Gibraltar v4.16.4: 
+---------------------
+- Cinzas Vulcânicas poderia atrapalhar o up AFK e gastar muito SP, então a chance de uso foi alterada para 20%
+
+---------------------
+  AI Gibraltar v4.16.5: 
+---------------------
+- resolvido problema que poderia deixar o homunculus "indeciso" ao procurar um novo alvo no meio de muitos alquimistas no 
+mesmo local
+
+---------------------
+  AI Gibraltar v4.16.7: 
+---------------------
+- corrigido problema na função de seguir o mestre, que podia deixar o homunculus muito longe até que ele saísse da tela
+
+- diminuído tempo de espera após Criar Homunculus para reação de 2 s para 1 s e tempo de espera para uso de magia de 4 s 
+para 2 s
+
+---------------------
+  AI Gibraltar v4.17: vários pequenos ajustes que melhoram o uso de habilidades
+---------------------
+- homunculus troca para um alvo melhor somente no estado de perseguição
+
+- Eleanor agora pode usar Pica-Pau, mas somente até ter a habilidade Quebra-Costelas disponível (e conseqüentemente Garras 
+Supersônicas também). Ao abrir a habilidade Quebra-Costelas, Eleanor considerará que tem Garras Supersônicas e não irá usar 
+Pica-Pau
+
+- ajustes nos tempos de reutilização de habilidades
+
+- finalmente o sistema de uso de habilidades entende que se uma habilidade falhar e a anterior tiver tempo de re-uso maior 
+que 1 s, a anterior pode ter atrapalhado a atual, e deve-se tentar usar novamente
+
+- homunculus tenta atacar alvos próximos ao tentar perseguir e não ter sem sucesso (em testes)
+
+
+
+---------------------
+
+
+
+=====================
+  Versão Anterior [Obsoleta]
+=====================
+  3º Lançamento 
+=====================
+AI Gibraltar vRemake.1: primeira versão da nova AI. Em testes ainda, feedback dos usuários são bem-vindos.
+- Novo processo de uso de habilidades.
+- Reescrita de todas as funções da AI, limpeza de código morto.
+- Criação de novos arquivos e limpeza de todos os anteriores: POR FAVOR, ANTES DE INSTALAR ESTA NOVA VERSÃO, 
+APAGUE TODOS OS ARQUIVOS DAS VERSÕES ANTERIORES: eles não serão compatíveis e não há mais suporte para eles.
+- Criação do arquivo "Habilidades.lua", em que é totalmente seguro o usuário testar programar suas habilidades.
+- Enfim recriação total da AI. Estou aberto a sugestões dos usuários e posso programar o uso de outras 
+habilidades em novas versões. E sinta-se livre para testar sua programação nos arquivos abertos.
+---------------------
+AI Gibraltar vRemake.2: atualização 1.
+- Desativado uso automático de Troca de Estilo, da Eleanor.
+- Correção na Onda Supersônica, da Eira.
+- Diminuído uso de Capricho e Pica-Pau dos homunculi S, para que a demora (cooldown) destes não atrapalhe o 
+uso das outras magias dos do tipo Mutante.
+- Correção no uso de Impacto Preciso do Bayeri.
+- Correção no uso de Convocação da Sera.
+---------------------
+AI Gibraltar vRemake.2.1: sub-atualização com correção crítica.
+- Correção em Bênção Caótica, que estava com mesmo ID de Capricho e era usado sem alvo enquanto ocioso.
+---------------------
+AI Gibraltar vRemake.2.2: sub-atualização com correção crítica.
+- Correção na movimentação do homunculus, que podia impedir que ele chegasse a certos destinos se houvesse
+paredes em volta, ou fossem locais estreitos.
+---------------------
+AI Gibraltar vRemake.2.3: sub-atualização com correção crítica.
+- Correção no uso manual de habilidades de área, que causavam erro caso estivessem fora do alcance.
+---------------------
+AI Gibraltar vRemake.2.3.1: sub-atualização com correção menor.
+- Correção de problema no arquivo "Habilidades.lua" que fazia a Eleanor não usar habilidades caso estivesse 
+longe do Bioquímico.
+- Atualização no texto explicativo do arquivo "Habilidades.lua".
+- Correção ortográfica no arquivo "Notas da Versão.txt".
+---------------------
+AI Gibraltar vRemake.3: atualização 2.
+- Pequena correção no reparo de movimentação, para homunculus evitar colocar destinos fora da tela.
+- Pequeno ajuste na proteção contra Orcs Arqueiros e outros que "puxam" o homunculus para fora da tela,
+que estava sendo acionada sem motivo e causando falsa sensação de "dancing".
+---------------------
+AI Gibraltar vRemake.3.1: sub-atualização com correção crítica.
+- Reparo em defeito criado por modificação anterior na proteção contra Orcs Arqueiros, que fazia o
+homunculus ser "puxado" para fora da tela mais facilmente.
+- Correção de cálculo de coordenadas que fazia homunculus sair da tela constantemente.
+- Correção de cálculo de coordenadas que fazia homunculus tentar se mover para posição de monstro ou outro 
+ID, resultando também em uma falsa impressão de "dancing".
+- Correção no modo de perseguir inimigos que perseguem o Bioquímico, na função de Seguir, para que o 
+homunculus não tente ficar se movendo várias vezes para perto do inimigo caso ele já esteja ao alcance.
+---------------------
+AI Gibraltar vRemake.3.1.1: sub-atualização com correção menor.
+- Diminuída sensibilidade da proteção contra monstros que "puxam" homunculus para fora da tela, que 
+causava excesso de movimentações.
+---------------------
+AI Gibraltar vRemake.3.1.2: sub-atualização com correção menor.
+- Pequeno ajuste no reparo de destinos para a função Move: o homunculus poderia sair da tela caso estivesse 
+na beirada da tela e movimentasse para a mesma posição em que se encontra.
+---------------------
+AI Gibraltar vRemake.4: atualização 3.
+- Adicionada, na verificação para trocar para alvos prioritários, uma verificação de se o inimigo é
+inalcançável, e se for, procurar um novo caso ele não esteja atacando. Assim, o homunculus/assistente
+não fica preso por muito tempo em inimigos bug'ados no mapa.
+- No arquivo de Habilidades padrão, modificado o modo como Dieter e Sera usam as suas habilidades de área:
+caso eles não tenham HP suficiente para ficar agressivos, não usá-los como buff para o bioquímico, para
+não engajar combate e realizar suicídio.
+- Outra correção na proteção contra Orcs Arqueiros que reduziu mais ainda a sensação falsa de "dancing".
+- Iniciada escrita do Manual de uso da AI.
+---------------------
+AI Gibraltar vRemake.5: atualização 4.
+- Limitação do uso de comandos da AI para que não sejam usados ao mesmo tempo que Mover: a AI então ignora
+o comando uma vez e marca para ser usado na próxima chamada de forma prioritária. Isso pode melhorar o 
+o desempenho da AI, já que os comandos gastam muita banda da internet, principalmente Mover e Usar 
+Habilidade.
+- Proteção para evitar que o homunculus saia da tela: caso a posição esteja a uma distância do mestre maior
+que 14, o homunculus vai usar um comando de Mover para a posição do mestre, ignorando qualquer limitação
+mencionada na modificação acima.
+- Sensibilidade de uso de habilidades aumentada para 1 looping de programação a mais.
+- Quando homunculus ou assistente for se mover para a mesma posição em que se encontra, e não estiver se 
+movendo, o comando é cancelado.
+---------------------
+AI Gibraltar vRemake.6: atualização 5.
+- Criado novo sistema de limitar uso de comandos. A limitação da versão anterior foi criada com o conceito 
+"gambiarra". Esta nova versão faz um sistema de lista de comandos a serem executados. Assim, a AI não
+enche a banda da internet de comandos, enviando um de cada vez para o jogo. Contudo, o comando de Ataque 
+foi deixado de fora dessa lista e é o único a ser executado a qualquer momento, pois colocá-lo na lista
+pode atrapalhar o Aspd do homunculus/assistente; e este comando não gasta muita banda.
+- Nova tentativa de ajustar a proteção para homunculus não sair da tela. Pelo menos agora, corrigi um erro
+que fazia o homunculus se mover para a mesma posição que se encontra, o que criava um novo movimento 
+involuntário para alguma direção.
+- Corrigido um defeito nos delays que fazia os combos da Eleanor não funcionarem na sua última etapa. 
+Lembrando: delays podem ser editados no arquivo Skills.lua!
+---------------------
+AI Gibraltar vRemake.6.1: sub-atualização com correção crítica.
+- Correção na função que impede que o homunculus saia da tela ("RepairDest"), que estava permitindo destino 
+inválido.
+---------------------
+AI Gibraltar vRemake.6.2: sub-atualização com correção crítica.
+- Removida a função Move da lista de espera de comandos do homunculus. Ela não usa tanta banda para valer a 
+pena deixar na espera, como as de receber lista de Actors e de Skills.
+- Ajuste no desempenho do homunculus ao usar habilidades: aumentar a sensibilidade de sucesso demais deixa
+muito tempo entre os usos. Então, diminuí a sensibilidade por verificação de SP e implementei um outro 
+sistema que recebe os dados da função de uso de habilidades, caso veha algum, pois a AI teve modificações
+na Renovação e no Bifröst.
+---------------------
+AI Gibraltar vRemake.7: atualização 6.
+- Ajuste na limitação de movimentos para só limitar quando não há inimigos e estiver seguindo próximo.
+- O uso de habilidades agora registra tempo de espera mesmo quando a habilidade falha. Isso porque a 
+detecção de uso por variação de SP não é estável e causa muitos falsos negativos pois a quantidade de SP leva
+um tempo não constante em relação à AI para se atualizar, depois do uso de habilidades.
+- Ativando o tempo de espera mesmo quando a habilidade falha impede que habilidades como Inundação de Magma, 
+do Dieter, fiquem sendo usadas constantemente e de forma desnecessária.
+- Também melhora a confiabilidade do uso de combos da Eleanor.
+---------------------
+AI Gibraltar vRemake.7.1: sub-atualização com correção crítica.
+- Correção no uso de habilidades para que Eleanor use o combo do modo "Agarrar" mais vezes.
+---------------------
+AI Gibraltar vRemake.7.2: sub-atualização com correção crítica.
+- Mais um ajuste para o modo de combo "Agarrar" da Eleanor. Agora, ela tenta usar Quebra-Costelas várias vezes,
+pois pode ter tido sua conjuração cancelada.
+---------------------
+AI Gibraltar vRemake.8: atualização 7.
+- Reimplementado o sistema de fila de espera de comandos. Notei que se ele não existir, pode ainda sobrecarregar
+a conexão exageradamente em alguns casos. Mas agora ele foi repensado para não atrapalhar o desempenho do 
+homunculus: caso não haja funções "pesadas" na fila, ele executa múltiplos comandos ao mesmo tempo. Mas caso haja
+funções como SkillObject ou GetActors, os comandos serão executados de um em um, para evitar excesso de dados 
+enviados e recebidos.
+- Agora, também os combos da Eleanor foram ajustados: ela vai tentar usar Quebra-Costelas mesmo se estiver no 
+Estilo de Luta. Assim, ela irá tentar o combo mesmo com o estilo no valor errado, permitindo que use sem precisar 
+de que a Garra Supersônica seja testada antes (para detectar que está no outro modo, de Agarrar). Isso ajuda, por
+exemplo, quando o homunculus é recém-criado, mas estava no estilo Agarrar.
+- Agora, também, a homunculus termina seus combos em múltiplos alvos, caso o inicial morra.
+- As seguintes habilidades foram implementadas somente para homunculi iniciais:
+-- Bater em Retirada, para Lif.
+-- Fortaleza, para Amistr.
+-- Sede de Sangue, para Amistr.
+Contudo, os seus modos de uso ainda estão em teste, e não é possível afirmar que estão funcionando.
+---------------------
+AI Gibraltar vRemake.8.1: sub-atualização com correção crítica.
+- Pequena modificação no uso padrão do combo da Eleanor: ela vai detectar que está em outro modo mais rapidamente
+caso sua habilidade falhe.
+---------------------
+AI Gibraltar vRemake.8.2: sub-atualização com correção crítica.
+- Alterado o modo de uso de combos da Eleanor, mais uma vez. Ela tentava várias vezes usar as habilidades de um 
+dos combos. Mas isso prejudicava muito seu desempenho.
+Agora, Eleanor tenta usar uma habilidade de cada, caso falhe. Isso pode causar várias mensagens de "Habilidade
+Falhou", mas ajuda a homunculus a reagir mais rapidamente.
+- Ajuste no desempenho da AI: detectei que durante a WoE voltou a ocorrerem travamentos ou lags em alguns mapas;
+por isso, vou tentar novamente implementar um sistema anti-lag. Desta vez, estou usando a função GetTick():
+-- primeiro, testei os.clock(), mas ocorreu um erro de sistema após um tempo, então preferi evitar essa função, 
+pois pode causar instabilidade;
+-- depois, passei a usar GetTick(): agora eu verifico o tempo entre as chamadas de execução da AI (o tempo que
+leva pro jogo chamar a AI novamente), e com base nesse valor, faço a AI pausar por determinado tempo 
+(milissegundos). Com isso, permite-se que o jogo e o servidor tenha tempo de 
+processar as funções antes de a AI pedir para que novas sejam executadas;
+-- contudo, percebi que a homunculus poderia ficar um pouco lenta. Por isso, também fiz que, nessa "pausa" em 
+que a AI não iria executar nada, ela possa somente atacar ou usar habilidades, caso tenha inimigos ou esteja 
+realizando combos. E entre essas execuções também é realizada uma pausa baseado no tempo que foi necessário
+para realizar o ataque ou a habilidade e no tempo que a AI levou para ser chamada.
+---------------------
+AI Gibraltar vRemake.8.3: sub-atualização com correção crítica.
+- Sistema de anti-lag modificado para não pausar totalmente a AI, e sim evitar comandos específicos (Move, 
+GetActors, SkillObject, SkillGround).
+---------------------
+AI Gibraltar vRemake.8.4: sub-atualização com correção crítica.
+- Pequena correção do sistema anti-lag da versão anterior, que levava em conta o tempo de execução da AI para os
+cálculos, e não o tempo de resposta do servidor.
+---------------------
+AI Gibraltar vRemake.8.5: sub-atualização com correção crítica.
+- O sistema anti-lag fazia o homunculus "esquecer" alguns comandos: agora o comando é mantido em uma fila de 
+espera para ser executado mais tarde, e é substituído caso um novo do mesmo tipo seja pedido, mas com novos dados.
+- Comando de Ataque ignora o sistema anti-lag.
+---------------------
+AI Gibraltar vRemake.8.6: sub-atualização com correção crítica.
+- Correções no sistema anti-lag: a fila de espera não estava sendo respeitada, ignorando o sistema.
+- Sistema anti-lag agora também está compatível com os combos da Eleanor.
+---------------------
+AI Gibraltar vRemake.8.7: sub-atualização com correção crítica.
+- Correções no sistema anti-lag: arrumado problema de incompatibilidade do sistema com a função de Seguir. Agora,
+o homunculus segue sempre que o mestre se move para longe.
+---------------------
+AI Gibraltar vRemake.8.8: sub-atualização com correção crítica.
+- Seguir estava sendo executado muitas vezes e de forma desnecessária, fazendo com que o homuunculus não 
+recuperasse SP. Agora ele segue somente quando o dono está a uma distância de 10 ladrilhos.
+- Corrigido defeito no limite de movimento do homunculus: o limite estava em 10, e foi alterado para 15. Isso 
+fazia distâncias ainda pequenas serem detectadas como improcessáveis pela AI.
+---------------------
+AI Gibraltar vRemake.8.9: sub-atualização com correção crítica.
+- Pequena correção no sistema anti-lag: os dados de comandos na fial de espera não eram atualizados para os mais
+atuais caso o comando anterior fosse pulado.
+---------------------
+AI Gibraltar vRemake.9: atualização 8.
+- Correção no sistema anti-lag, que não estava conseguindo contornar travamentos muito grandes: agora a pausa da 
+programação é aumentada mais um pouco proporcionalmente ao tempo de resposta do jogo.
+---------------------
+AI Gibraltar vRemake.9.1: sub-atualização com correção crítica.
+- Sistema de anti-lag: mais uma limpeza na programação, para que o sistema funcione corretamente.
+- Corrigido defeito nos cálculos do temporizador que fazia com que o sistema anti-lag sempre tivesse um intervalo
+de 0 ms!
+---------------------
+AI Gibraltar vRemake.9.2: sub-atualização com correção crítica.
+- Temporizador do sistema anti-lag aumentado um pouco proporcionalmente à demora do jogo, para evitar travamentos 
+maiores.
+- Combos de habilidades ignoram o anti-lag, mas o tempo é acumulado para ser contado quando o combo acabar. Assim, 
+caso aconteça um travamento ao usar o combo, o homunculus irá esperar o tempo que deveria entre as habilidades.
+- Agora, os comandos de Mover e Atacar estão fora do anti-lag: na AI convencional, não há lag com esses comandos. 
+O travamento só aparece quando a comandos de habilidaes são chamados.
+---------------------
+AI Gibraltar vRemake.9.3: sub-atualização com correção crítica.
+- Reaplicado o anti-lag para a função Mover.
+---------------------
+AI Gibraltar vRemake.9.4: sub-atualização com correção crítica.
+- Sistema anti-lag reescrito novamente. Agora, levando em consideração um mod do Azzy que ele disponibilizou para 
+download. Espero que resolva.
+- Nesse sistema, agora, além de ter o temporizador entre envios de comandos, aguardando alguns milissegundos 
+proporcionalmente à resposta do jogo, está programado o método de envio de 1 comando por vez, que estava no mod.
+- Eu já programei para 1 envio por vez e no nosso servidor, isso também não resolveu. Espero que os dois sistemas
+juntos corrijam o defeito de baixa performance no processamento de AIs. :cP
+- Agora, também, a função de Seguir faz o homunculus Perseguir inimigos, caso estejam entre o usuário e o 
+homunculus. Isso para que o homunculus reaja mais rapidamente e não fique andando sem motivo, como se nada 
+estivesse acontecendo.
+- Cálculo do temporizador reduzido um pouco, pois agora um comando é enviado por vez.
+- O novo modo de processamento de lag, agora, ao invés de ignorar totalmente os comandos de Mover ou Atacar só
+ultrapassa o temporizador. A fila de 1 comando por vez ainda é respeitada. Comandos de Mover ou Atacar precisam
+ser executados com prioridade, para que o homunculus alcance o inimigo e não seja prejudicado no Aspd.
+---------------------
+AI Gibraltar vRemake.9.5: sub-atualização com correção crítica.
+- Pequena correção no limite de um comando por vez em cada ciclo da AI, que nã oestava sendo respeitado.
+- Tentativa de aumentar a quantidade de usos de Bênção Caótica.
+- Moderação no uso de outras habilidades que têm conjuração, dos homunculi S, para que não fiquem muito tempo
+sem atacar.
+---------------------
+AI Gibraltar vRemake.9.6: sub-atualização com correção crítica.
+- Ajuste no sistema de listagem de comandos da AI.
+---------------------
+AI Gibraltar vRemake.9.7: sub-atualização com correção crítica.
+- Ajuste pequeno no sistema anti-lag.
+---------------------
+AI Gibraltar vRemake.9.8: sub-atualização com correção crítica.
+- Pequena modificação para otimizar a AI: ao realizar comandos de Atacar, ou Usar Habilidade, ignore os próximos 
+comandos de Mover. Assim, a AI diminui um pouco o excesso de comandos repetitivos ou que se sobrepõem.
+---------------------
+AI Gibraltar vRemake.9.9: sub-atualização com correção crítica.
+- Correção que podia fazer o homunculus/assistente levar um longo período sem usar habilidades.
+- Corrigido problema que podia atrapalhar a movimentação do homunculus.
+---------------------
+AI Gibraltar vRemake.9.9.1: sub-atualização com correção menor.
+- Correção de pequeno defeito que impedia movimentações diretas com o Comando Mover.
+---------------------
+AI Gibraltar vRemake.9.9.2: sub-atualização com correção menor.
+- Correção de pequeno defeito que causava falha na movimentação do homunculus a cada vez que ele tentasse usar 
+habilidades ou atacar.
+---------------------
+AI Gibraltar vRemake.9.9.3: sub-atualização com correção menor.
+- Ajuste em outro problema que poderia causar travamento do uso de habilidades de homunculus ou assistentes.
+---------------------
+AI Gibraltar vRemake.10: atualização 9.
+- Correção de defeito que impedia salvar o tempo correto entre verificações de inimigos na tela, podendo causar
+excesso de comandos.
+- Ajuste no sistema anti-lag: como ele faz uma lista de espera de comandos, agora a lista é limpa caso seja 
+necessário.
+- Caso comandos não precisem mais ser executados, e eles ainda não tenham sido chamados, eles serão removidos 
+da lista, impedindo movimentações desnecessárias, ou um primeiro ataque que possa ser KS.
+- Correção no uso de habilidades: agora, o homunculus verifica corretamente se tem o SP necessário para o nível
+em que irá usar a habilidade, e não sempre pelo nível máximo da mesma. Isso vai afetar mais os homunculi quando
+acabaram de ser criados e têm pouco SP.
+- Diminuído problema em que o homunculus poderia tentar um alvo não-ofensivo, ou adquirir um inimigo marcado 
+como passivo por engano.
+- Habilidade Bênção Caótica foi corrigida, e agora é usada corretamente mesmo estando longe do usuário.
+---------------------
+AI Gibraltar vRemake.10.0.1: sub-atualização com correção menor.
+- Pequeno ajuste no uso de Bênção Caótica, para que permita o uso de outras habilidades, e não fique eternamente 
+sendo utilizada.
+---------------------
+AI Gibraltar vRemake.10.0.2: sub-atualização com correção menor.
+- Sistema anti-lag tem a pausa limitada a 1 minuto. Isso pode prevenir problemas de travamento do homunculus por 
+mais tempo caso o jogo demore demais a responder.
+---------------------
+AI Gibraltar vRemake.10.1: sub-atualização com correção crítica.
+- Corrigido erro de digitação no código que poderia resultar em o homuncuus começar a atacar um pouco mais 
+devagar após um longo período atacando.
+- Por prevenção a problemas futuros, sistema anti-lag tem a pausa limitada a 30 segundos.
+- Corrigido problema que poderia atrapalhar o sistema de anti bug position enquanto o homunculus está atacando.
+- Implementado o uso automático de Analgésico. Ainda em testes.
+- Implementado o uso automático de Brisa da Calmaria. Ainda em testes.
+---------------------
+AI Gibraltar vRemake.10.1.1: sub-atualização com correção menor.
+- Correção de defeito que impedia correta movimentação do homunculus/assistente em determinadas situações.
+---------------------
+AI Gibraltar vRemake.10.1.2: sub-atualização com correção menor.
+- Correção de pequeno erro que podia impedir o contorno de obstáculos pelo homunculus por um tempo maior.
+---------------------
+AI Gibraltar vRemake.10.1.3: sub-atualização com correção menor.
+- Corrigido defeito na organização da programação que poderia conflitar valores na hora de enviar os comandos
+da AI para o jogo.
+---------------------
+AI Gibraltar vRemake.10.2: sub-atualização com correção crítica.
+- Corrigido erro na função de tectar aliados para curar para Brisa da Calmaria, ou para buff'ar com Analgésico.
+- Por prevenção a problemas futuros, sistema anti-lag tem a pausa limitada a 15 segundos.
+- Aumento no desempenho da AI:
+-- para continuar com o sistema anti-lag, mas deixar a resposta ao jogo mais rápida, o tempo entre comandos 
+permanece, mas reduzido. Também continua o método de 1 comando por ciclo da AI;
+-- contudo, agora a AI também prioriza comandos de Atacar, caso outro não possa ser executado;
+-- comandos de Habilidade são priorizados sobre de Mover, que são priorizados sobre de Atacar. Contudo, o ciclo
+requer que cada um deles tenha sido utilizado, ou que não conste na lista de espera, para que a prioridade seja
+respeitada novamente;
+-- isso permite que todos os comandos da lista de espera sejam executados corretamente;
+---------------------
+AI Gibraltar vRemake.10.2.1: sub-atualização com correção menor.
+- Pequeno ajuste no sistema anti-lag.
+- Correção no sistema de proteção contra hits, que poderia atravessar o sistema anti-lag e causar travamentos.
+---------------------
+AI Gibraltar vRemake.10.3: sub-atualização com correção crítica. [ANULADA]
+- Correção no sistema anti-lag.
+---------------------
+AI Gibraltar vRemake.10.4: sub-atualização com correção crítica.
+- Corrigido defeito crítico no sistema anti-lag que poderia deixar o homunculus parado em ocasiões específicas.
+- Correção no sistema de comportamento para monstros e IDs que poderia não salvar mais dados novos caso a lista 
+atingisse o limite de 50. Agora, ela apaga valores antigos corretamente.
+- Diminuída a distância a que o homunculus permanece sem seguir o dono, para que este tenha um tempo de reação 
+mais rápido, para que permaneça na tela com mais freqüência.
+- Mesma correção aplicada aos comportamentos foi feita à lista de amigos protegidos.
+- Sistema anti-lag agora só usa o tempo de resposta do jogo como intervalo entre comandos. Assim, ele não 
+sobrecarrega o jogo com chamadas. E continua o método de enviar um comando de cada vez.
+- Contudo, alguns comandos específicos atravessam o intervalo de tempo, como Atacar ou Mover caso seja 
+prioridade, como ao começar a seguir o Bioquímico.
+- Com isso, há a correção do problema que poderia ocasionar demora do homunculus ao seguir.
+- Ajuste no uso de Bênção Caótica, que estava sendo usada desnecessariamente.
+- Novo: agora, mandar Mover manualmente, e começar a andar com o Bioquímico faz o homunculus andar à frente.
+---------------------
+AI Gibraltar vRemake.10.4.1: sub-atualização com correção menor.
+- Ajuste no processamento da lista de espera de comandos: isso quer dizer que a AI teve o desempenho aumentado.
+- Correção de pequeno bug que fazia o homunculus ficar se mexendo ao atacar, o que poderia atrapalhar na 
+recuperação de HP e SP.
+- Homunculus evita ir atacar os monstros do bioquímico caso este esteja parado. Assim, evita levar monstros 
+para perto dele, como mobs ou MVPs.
+- Homunculus e assistente têm maior confiabilidade na execução de comandos de Mover manual, que às vezes 
+poderiam falhar.
+---------------------
+AI Gibraltar vRemake.10.4.7: sub-atualização com correção menor.
+- Pequeno ajuste que impedia correta movimentação do homunculus com o comando manual.
+---------------------
+AI Gibraltar vRemake.10.4.8: sub-atualização com correção menor.
+- Pequena correção de erro de digitação que poderia levar à detecção falsa de inimigos.
+- Pequeno ajuste para impedir movimentação do homunculus para fora da tela.
+---------------------
+AI Gibraltar vRemake.10.4.9: sub-atualização com correção menor.
+- Pequeno ajuste que impedia correta movimentação do homunculus por distâncias grandes.
+---------------------
+AI Gibraltar vRemake.10.4.12: sub-atualização com correção menor.
+- Ajustes no uso de habilidades de homunculi iniciais para homunculi S. Chance no ciclo da AI foi aumentada.
+- Melhora no sistema de log da AI: mais detalhes e descrições ao executar o comando /traceai.
+- Aprimoramento na função de seguir, para adquirir inimigos mais rapidamente.
+- Aprimoramentos nas funções de comandos manuasi, para que sejam executados com mais prioridade na lista de
+espera de comandos.
+---------------------
+AI Gibraltar vRemake.10.5: sub-atualização com correção crítica.
+- Correções para impedir que o homunculus saia da tela no AFK. Ainda requer testes para ver se funcionam.
+- Correções diversas para melhorar o desempenho geral da AI.
+- Agora, o homunculus ou assistente entrará em um estado de ir até um alvo, ao usar magias automaticamente
+de fora do alcance.
+- Ajustes para melhor uso de habilidades. 
+- Ajustes para problemas que impediam movimentação do homunculus ao adquirir alvos do alquimista.
+---------------------
+AI Gibraltar vRemake.10.6: sub-atualização com correção crítica.
+- Correções para erro que impedia uso manual de habilidades, da atualização anterior.
+---------------------
+AI Gibraltar vRemake.10.10: sub-atualização com correção crítica.
+- Correção de erro fatal que poderia fazer o homunculus entrar em um looping infinito de comandos Mover ao
+seguir o mestre, levando o homunculus para fora da tela.
+- Correção de defeito fatal que poderia travar o homunculus/assistente ao mover manualmente.
+- Ajustada função de proteção contra movimentação automática do jogo ao levar dano (que pode levar o 
+homunculus para fora da tela), que poderia ser ativada em momentos impróprios ou mesmo se o homunculus
+não levasse dano.
+- Ajuste na movimentação dos homunculi, para ignorar totalmente movimentos para sua própria posição, o que 
+poderia resultar em uma movimentação para a célula ao lado.
+- Aprimorada movimentação para um alvo, ou para uma área dentro do alcance de habilidades.
+- Aprimorada função de detectar inimigos que estão atacando aliados, para manter os alvos na memória e 
+usá-los na próxima verificação.
+- Criado mais um sistema de proteção contra a movimentação para fora da tela, do homunculus. Ainda em 
+testes.
+- Limpeza de código morto na função de Mover.
+- Mais ajustes no log do comportamento do homunculus (com "/traceai").
+- Outras correções menores, mas não menos importantes, em posicionamentos, e manipulação de alvos.
+- Homunculus evita trocar de alvo, caso esteja mob'ado, para não levar os monstros para o bioquímico. 
+Ainda em testes.
+---------------------
+AI Gibraltar vRemake.10.10.1: sub-atualização com correção menor.
+- Pequeno ajuste na função que impede movimentação do homunculus para fora da tela.
+---------------------
+AI Gibraltar vRemake.10.10.2: sub-atualização com correção menor.
+- Função para deixar homunculus fora da tela ainda não estava funcionando. Realizados mais alguns ajustes.
+---------------------
+AI Gibraltar vRemake.10.10.3: sub-atualização com correção menor.
+- Mais algumas pequenas modificações para aprimorar a função de filtro de posicionamento para Mover.
+---------------------
+AI Gibraltar vRemake.10.10.4: sub-atualização com correção menor.
+- Função de filtro para Mover não levava em conta que mover para a posição do próprio homunculus poderia 
+movê-lo para outra posição. Tentativa de usar isso como proteção para evitar que ele saia da tela.
+---------------------
+AI Gibraltar vRemake.10.10.5: sub-atualização com correção menor.
+- Mais tentativas de corrigir problema que deixa homunculus fora da tela.
+---------------------
+AI Gibraltar vRemake.10.10.7: sub-atualização com correção menor.
+- Modificações para proteção contra homunculus sair da tela durante o AFK.
+- Ajustes na movimentação do homunculus, para evitar deslocamentos desnecessários.
+---------------------
+AI Gibraltar vRemake.10.10.8: sub-atualização com correção menor.
+- Ajuste em erro de digitação na programação da AI, que fazia a proteção de movimento automático falhar.
+---------------------
+AI Gibraltar vRemake.10.10.9: sub-atualização com correção menor.
+- Pequenos ajustes.
+---------------------
+AI Gibraltar vRemake.10.10.10: sub-atualização com correção menor.
+- Ajustes para homunculus evitar atacar alvos passivos.
+- Ajustes na movimentação do homunculus, para não sair da tela. Acredito que agora tenha funcionado, mas 
+requer testes... x.x Difícil...
+---------------------
+AI Gibraltar vRemake.10.11: sub-atualização com correção crítica.
+- Mais modificações para evitar que o homunculus saia da tela:
+-- o jogo tem um bug de muito tempo atrás em que, de vez em quando, mesmo com uma AI sem nada programado,
+caso o homunculus leve dano, há uma chance de ele andar automaticamente até o monstro:
+--- nesta AI, criei um sistema de sempre que o homunculus começar a andar, enviar um comando de Mover 
+com os destinos corretos, para evitar que haja um movimento indesejado;
+--- contudo, o sistema estava falhando caso o homunculus estivesse na beirada da tela;
+--- por isso, agora, sempre que o homunculus estiver se movendo, na beirada da tela, ele vai tentar se 
+mover para a posição do mestre.
+- Pequeno ajuste na detecção de inimigos: 
+-- o jogo não fornece informações detalhadas de quem está atacando quem. Ele só mostra os inimigos na 
+tela, seus gestos, e o alvo de ataques ou magias de alvo único;
+-- por isso, fica difícil detectar magias de área, ou magias inofensivas, pois se deve esperar o 
+gesto do alvo;
+-- e o sistema de atualização do jogo é "assíncrono" em relação à AI (algo assim);
+-- por isso, a AI tenta atacar qualquer alvo próximo caso algum aliado leve dano, mas nenhum inimigo tiver 
+o gesto de ataque ou usar magia, por precaução, permanecendo sempre reativo;
+-- contudo, isso resultava em ataques a alvos inválidos como bandeiras de castelos, ou NPCs;
+-- por isso, agora a AI procura atacar primeiro alvos que tenham alterações de gestos, ou seja, alvos que 
+se movam, evitando priorizar alvos inválidos ou imóveis.
+---------------------
+AI Gibraltar vRemake.10.11.1: sub-atualização com correção menor.
+- Pequenos ajustes e correções nas modificações da versão anterior.
+---------------------
+AI Gibraltar vRemake.10.11.2: sub-atualização com correção menor.
+- Correção para defeito que fazia homunculus ficar se movendo várias vezes caso Propulsão de Carrinho 
+estivesse ativa, na versão anterior.
+---------------------
+AI Gibraltar vRemake.10.11.3: sub-atualização com correção menor.
+- Correções pequenas para aprimorar desempenho da AI.
+---------------------
+AI Gibraltar vRemake.10.11.4: sub-atualização com correção menor.
+- Mais correções para o sistema anti movimento automático que ocorre quando o homunculus leva dano.
+- Ajustes na movimentação do homunculus.
+- Correção de problema que poderia levar o homunculus a ficar atacando um alvo que já morreu.
+---------------------
+AI Gibraltar vRemake.10.11.5: sub-atualização com correção menor.
+- Ajuste no sistema anti-lag, para evitar travamentos.
+---------------------
+AI Gibraltar vRemake.10.11.6: sub-atualização com correção menor.
+- Ajuste no sistema anti-lag, para evitar lag que ainda poderia ocorrer em algumas situações de Seguir ou
+Perseguir.
+---------------------
+AI Gibraltar vRemake.11: atualização 10.
+ Depois de vários problemas nas versões 10 e 9, e tentativas de solução, fiz o máximo possível para 
+amenizar qualquer problema que possa aparecer, nesta versão.
+
+ Realizei uma limpeza de código em toda a AI, assim como reescrevi o sistema anti-lag novamente, e a 
+proteção de o homunculus se mover automaticamente para fora da tela.
+
+- No sistema anti-lag, fiz com que um comando seja executado de cada vez, incluindo o de verificar 
+inimigos na tela do jogador. Contudo, o único comando que pode ser executado ao mesmo tempo sem causar lag
+com essa verificação, é o de Atacar. O resto, precisa de um tempinho para sincronizar com o jogo.
+
+- Assim a velocidade de ataque do homunculus é mais bem respeitada, priorizando ao máximo comandos de ataque. 
+
+ Ainda requer mais tempo de testes para ver se não vai travar novamente o jogador em caso de lag do
+servidor. Por mais que eu faça um tempo entre os comandos, e um de cada vez, de vez em quando o servidor 
+não consegue processar informações do homunculus a tempo, e trava ele e o jogador, enquanto o resto do
+mapa funciona. O que é muito injusto. Por isso, tentei deixar um ciclo da AI em pausa a cada vez que
+comandos que requerem maior tempo de processamento, como Mover ou Usar Habilidade, são utilizados.
+
+ Sobre o homunculus sair da tela: eu realmente tentei muito resolver o problema, espero que agora tenha 
+amenizado ao máximo, mas é impossível garantir 100% que o homunculus vá ficar dentro da tela do jogador. 
+
+ Realmente, até posso limitar a movimentação do homunculus a 1 quadrado de distância do limite máximo, mas
+isso vai impedir que ele reaja a arqueiros ou monstros que fiquem no canto da tela, o que é horrível para
+PvP ou mapas com posicionamento irregular.
+
+ E falando de posicionamento irregular, essa é uma das causas do problema: o comando Mover, antigamente, 
+quando era executado em um local impróprio, como uma árvore, ou pedra, fazia o homunculus ficar parado.
+Agora, ele fica tentando ir àquele lugar o quanto puder por algum tempo. Até aí é uma coisa boa, pois pode 
+mover para o mais próximo possível do destino.
+
+ O problema é que de vez em quando, isso faz o homunculus contornar o obstáculo, ou tentar uma posição, 
+indo automaticamente para fora da tela.
+
+ Isso sem contar os movimentos automáticos causados por um bug com ataques à distância que jogam o 
+homunculus para fora da tela mesmo com uma AI que não realize comando Mover para lá. E as habilidades de 
+monstros que empurram os homunculus de posição.
+
+ E tudo contando com um sistema falho do jogo e do servidor de teletransportar o homunculus de volta para 
+o alquimista.
+
+- Corrigi o quanto pude o problema de o homunculus tentar adquirir um inimigo antes de matar o próprio.
+Coloquei um temporizador para, quando um alvo é descartado, esperar um pouco para adiquirir um novo de 
+forma agressiva. Assim, o homunculus pode primeiro reagir para um próprio que o esteja atacando.
+
+- A movimentação pode parecer um pouco "travada" de vez em quando, mas isso é por causa de o homunculus 
+não ficar "spam'mando" o comando de Mover para o jogo, o que era uma das causas de travamento.
+
+- Outra coisa, ouvi falar que alguns monstros vão ocupar tamanhos diferentes no mapa, como áreas de 3x3 ao
+invés de um único quadrado. Não sei como o homunculus iria reagir para isso. Tentei realizar uma programação
+para o homunculus parar de tentar perseguir e atacar, para caso seja um monstro desse tipo, e "pareça" que 
+está fora do alcance de ataque, por causa da área inacessível em volta dele.
+
+ Mas é só uma tentativa de prever um problema futuro, que não faz muito efeito agora.
+
+- E agora a AI conta com um sistema de memorização de alvos. Como o jogo muda os gestos dos monstros várias 
+vezes, muitas vezes o homunculus parava de detecar o inimigo como ofensivo. Por isso, agora ele marca esse
+inimigo por 10 s ou até o homunculus trocar de inimigo, quando é realizada uma nova verificação.
+
+- E mais uma coisa: agora, também, quando o homunculus está seguindo, e um inimigo está próximo, o homunculus
+ficará nos estados Perseguir e Atacar, ao invés de entrar em um ciclo infinito de Seguir para Perseguir e 
+vice-versa, ou só realizando comandos de Seguir, ignorando o inimigo.
+---------------------
+AI Gibraltar vRemake.11.3: sub-atualização com correção crítica.
+- Correção para problema que poderia travar o homunculus em alguns casos ao seguir ou trocar de inimigo.
+- Correção para problema que poderia impedir o uso adequado do nível das habilidades automáticas.
+- Adicionado código para, se o destino do homunculus for para fora da tela, e ele não tiver destino válido 
+ainda dentro da tela, tentar se mover para a posição do dono.
+---------------------
+AI Gibraltar vRemake.11.5: sub-atualização com correção crítica.
+- Correção para impedir que o homunculus tente reagir para alvos imóveis.
+- Correção para impedir um pouco mais a troca indesejada de alvo pelo homunculus. Adicionados temporizadores
+entre trocas de alvo, para ter um certo tempo antes que ele tente trocar para um novo.
+- Mais alguns ajustes para impedir movimentação inadequada do homunculus.
+---------------------
+AI Gibraltar vRemake.11.5.1: sub-atualização com correção menor.
+- Pequeno ajuste para prevenir looping infinito em estados do homunculus.
+---------------------
+AI Gibraltar vRemake.11.5.2: sub-atualização com correção menor.
+- Pequeno ajuste para melhorar o foco do homunculus em um único alvo.
+---------------------
+AI Gibraltar vRemake.11.10: sub-atualização com correção crítica.
+- Ajuste no sistema anti-lag, para dar mais tempo entre comandos de usar habilidades e outros. O comando de 
+usar habilidades é o que mais causa lag, seguido pelo de Mover.
+- Priorizado o comando de Mover ao perseguir, fazendo com que o homunculus chegue mais rápido a seus inimigos.
+- Sistema de memória de inimigos do homunculus melhor definido: 
+-- ao ser ofensivo, inimigo é marcado e um tempo limite para ataque é definido;
+-- se continuar ofensivo, o tempo limite para ataque aumenta, permitindo atacar por mais tempo sem tentar 
+outro;
+-- se o inimigo estiver parado ou não se mexer, o tempo limite diminui.
+- Tempo para adquirir alvos agressivos reajustado para 5 s, e modificado momento em que é ativado:
+-- quando o tempo limite é excedido, não tente adiquirir alvos agressivos por 5 s. O inimigo ainda pode 
+recomeçar ataque;
+-- se o homunculus acabo ude trocar de estado, como por exemplo, de Perseguir, para Atacar, aguarde 5 s até 
+tentar um novo inimigo. O homunculus pode ter acabado de atacar, e o inimigo pode reagir.
+- Ajuste no uso de habilidades.
+- Delays de combos da eleanor atualizados para valores mais confiáveis.
+- Escritas novas funções para priorizar habilidades ofensivas sobre outras.
+- Corrigido um defeito grave que poderia impedir o uso de habilidades de cura e de suporte de forma automática
+da Eira ou da Sera.
+- O modo de "sniper" de homunculus Vanilmirth ou Filir para usar habilidades em um monstro enquanto persegue 
+outro agora só funciona se ele já estiver dentro do alcance, evitando entrar no estado de ir até ele, 
+desnecessariamente.
+---------------------
+AI Gibraltar vRemake.11.10.1: sub-atualização com correção menor.
+-- Correção para problema que anda fazia arqueiros levarem homunculus para fora da tela.
+-- Correção para problema que ainda levava homunculus a reagir para alvos de forma inadequada.
+---------------------
+AI Gibraltar vRemake.11.10.2: sub-atualização com correção menor.
+-- Correção para pequeno travamento na funçã ode perseguir, da função anterior, causado pela proteção contra 
+arqueiros.
+---------------------
+AI Gibraltar vRemake.11.10.4: sub-atualização com correção menor.
+-- Correção no filtro de Mover, que estava usando valores errados para validação.
+-- Sistema anti-lag ajustado para evitar filtrar mais movimentos de Mover.
+---------------------
+AI Gibraltar vRemake.11.10.5: sub-atualização com correção menor.
+-- Ajuste no filtro de comandos Mover.
+---------------------
+AI Gibraltar vRemake.11.11: sub-atualização com correção crítica.
+-- Diversos ajustes no uso de habilidades dos homunculi. 
+-- Algumas habilidades estavam com baixíssimas chances de serem executadas e foram reprogramadas, principalmente 
+as de área.
+-- Correção na priorização de usos de habilidades que só chamava a habilidade Capricho.
+-- Ajustes na detecção de cooldown de habilidades para permitir que elas sejam usadas corretamente, mesmo
+nas configurações problemáticas do nosso servidor bRO...
+-- Alguns problemas no filtro de Mover foram corrigidos novamente, para permitir comandos de emergência que
+evitam que o homunculus saia da tela.
+---------------------
+AI Gibraltar vRemake.11.12: sub-atualização com correção crítica.
+-- Correção de erro de digitação em Notas da Versão, da versão anterior.
+-- Alterada a função do Comando Reservado Mover para os homunculi Dieter e Eira (a ser implementado no Manual):
+
+  Os comandos reservados podem ser realizados pressionando e segurando Shift enquanto se executa um outro 
+comando de homunculus normal. Contudo, esses comandos serão realizados quando o homunculus estiver ocioso.
+
+  Esses comandos são muito desconhecidos e são praticamente inúteis, pois fazem o que a AI faria normalmente, 
+mas só depois do homunculus ficar ocioso.
+
+  Comando Reservado Mover: Shift + Alt + Botão Direito do Mouse no chão.
+
+  A alteração permite usar as habilidades de área do homunculus sem o defeito do jogo de usar como base o 
+Bioquímico para definir o alcance e o estado de disponível para uso das habilidades.
+
+  O defeito faz com que o comando manual de habilidades de área dos homunculi sejam processados como um comando 
+do jogador pelo jogo, até realizando um movimento automático do Bioquímico caso este estivesse fora do alcance.
+
+  Por isso, defini os seguintes comandos para serem comandos de habilidade de área, nos homunculi mais 
+prejudicados (funciona enquanto o Bioquímico estiver sentado ou escondido):
+
+--- para o Dieter:
+---- pressione uma vez o Comando Reservado Mover em uma célula para executar Cinzas Vulcânicas em nível 5 naquele 
+local. 
+---- pressione três vezes o Comando Reservado Mover em uma célula do chão para executar Derretimento com Lava 
+naquele local, em nível 5.
+
+--- para o Eira:
+---- pressione uma vez o Comando Reservado Mover em uma célula para executar Onda Supersônica em nível 1 naquele 
+local. 
+---- pressione três vezes o Comando Reservado Mover em uma célula do chão para executar Onda Supersônica 
+naquele local, em nível 5.
+
+  Mesmo assim, o jogo ainda tem o defeito de usar o Bioquímico como base para o comando, e automaticamente impede
+a realização do mesmo caso o Bioquímico esteja em uma Montaria.
+---------------------
+AI Gibraltar vRemake.11.12.1: sub-atualização com correção menor.
+-- Pequeno ajuste para habilidades de área do Dieter, que ainda não eram usadas.
+-- Correção na habilidade Illuminatus do Bayeri, que não era comandada corretamente.
+---------------------
+AI Gibraltar vRemake.11.14: sub-atualização com correção crítica.
+-- Ajuste em problemas que poderiam causar instabilidade na AI.
+-- Correção de erro causado pelo comando Atacar.
+---------------------
+AI Gibraltar vRemake.11.14.1: sub-atualização com correção menor.
+-- Correção de erro de digitação.
+-- Correção em problema na priorizsaçã ode comandos do sistema anti-lag.
+---------------------
+AI Gibraltar vRemake.11.14.2: sub-atualização com correção menor.
+-- Pequenos ajustes para evitar sobrecarga de comandos, mas ainda manter uso rápido de habilidades e de movimento.
+---------------------
+AI Gibraltar vRemake.11.14.4: sub-atualização com correção menor.
+-- Ajustes para otimizar execução de comandos.
+-- Ajustes para evitar que o homunculus saia da tela.
+---------------------
+AI Gibraltar vRemake.11.15: sub-atualização com correção crítica.
+-- Ajustes para otimizar execução de comandos e no sistema de priorização de comandos, evitando possíveis 
+travamentos ao repetir sempre o mesmo comando.
+-- Correção em problema que podia fazer o Dieter usar Cinzas Vulcânicas indiscriminadamente.
+-- Inundação de Magma agora é conjurada enquanto o homunculus ataca caso o efeito acabe.
+-- O cooldown de Inundação de Magma e Cinzas Vulcânicas é reduzido em certar ocasiões específicas, para que possam
+ser reutilizados caso falhem. Em outros momentos, o cooldown pode ser totalmente cancelado, como na troca de estado 
+ou de inimigo. O último caso também ocorre com Derretimento com Lava.
+-- Correção para defeito que impedia a correta movimentação para as bordas da tela caso algum inimigo agressivo 
+esteja lá.
+-- Otimização dos comandos do homunculus para perseguir inimigo.
+-- Aprimoramento das modificações da versão 11.12. 
+
+Usar os comandos reservados requer o pressionamento de Shift, e
+isso poderia levar o comando a ser usado como Ataque a um alvo inválido, como um jogador fora do PvP, ou como o
+comando de Seguir do próprio jogador, quando a opção "no Ctrl" está desativada.
+
+Portanto, agora os comandos reservados de Mover e de Atacar são traduzidos em comando de usar habilidade de área 
+para Dieter e Eira.
+-- Atualização e correção do texto do Manual do Usuário. 
+---------------------
+AI Gibraltar vRemake.11.15.5: sub-atualização com correção menor.
+-- Ajuste na priorização de comandos para prevenir pequenos travamentos que poderiam ocorrer caso o homunculus
+fosse comandado muitas vezes a usar habilidades. 
+-- Correção para problema que levava o homunculus Dieter a utilizar Cinzas no local em que se encontra o 
+Bioquímico. 
+-- Correção para problema que poderia evitar que Sera usasse Analgésico.
+-- Reprogramado uso de habilidades para que possa ser usado como referência o valor de alcance do database da AI
+ao invés do valor providenciado pelo jogo. 
+
+Isso corrige um defeito no sistema de uso de habilidades que poderia pausar o uso de novas habilidades caso o 
+homunculus S tentasse usar Pica-Pau. O jogo fornece o alcance para essa habilidade como sendo 1, e o homunculus 
+tentaria chegar ao alvo para usá-la antes de tentar outras habilidades.
+
+-- Agora, o homunculus só persegue o alvo para usar habilidades em algumas específicas ou quando comandado pelo 
+usuário.
+-- Comandos de habilidade pelo usuário também usam valores de alcance do database da AI.
+-- Reprogramado sistema de priorização de habilidades para não repetir a tentativa de usar uma habilidade duas
+vezes seguidas.
+---------------------
+AI Gibraltar vRemake.11.15.6: sub-atualização com correção menor.
+-- Pequena correção na detecção de uso de habilidades.
+---------------------
+AI Gibraltar vRemake.11.20: sub-atualização com correção crítica.
+-- Reprogramado novamente o sistema de priorização de comandos.
+-- Correção para problema que poderia travar o homunculus ao tentar priorizar sempre o mesmo comando.
+-- Ajuste no sistema de uso de habilidades, para que o homunculus não fique tentando usar sempre a mesma várias 
+vezes.
+-- Correções no sistema de detecção de habilidades e de priorização das mesmas, para que o homunculus use-as 
+com mais freqüência.
+-- Ajuste para evitar problemas de orcs arqueiros levarem o homunculus para fora da tela: agora, se o gesto do
+homunculus é de conjuração, cancelar comandos Mover, para evitar qualquer comportamento inesperado. Contudo,
+ainda não é garantido que o homunculus não vá se movimentar sozinho por defeito do jogo.
+-- Correção no sistema que evita que o homunculus saia da tela: os destinos do movimento não estavam sendo 
+reparados corretamente.
+-- Homunculi e assistentes agora só se movimentam para as bordas da tela caso haja um inimigo os atacando de lá.
+-- Correção no database de habilidades dos homunculi. O tempo de pós-conjuração estava incorreto para Capricho.
+-- Correção no sistema anti-KS, para tentar identificar melhor monstros que atacam inimigos fora da tela, os 
+quais são imperceptíveis para a AI.
+---------------------
+AI Gibraltar vRemake.11.20.1: sub-atualização com correção menor.
+-- Correção para problema que poderia causar travamento em homunculi com combos de habilidades, especialmente a
+Eleanor.
+-- Ajustes no sistema de uso de habilidades, para fazer a espera ser pela metade caso a habilidade falhe ou a
+conjuração seja interrompida: não dá pra saber se a conjuração é interruptível por detecções da AI.
+---------------------
+AI Gibraltar vRemake.11.20.5: sub-atualização com correção menor.
+-- Correção no valor de espera entre usos de habilidades do combo da Eleanor. Precisa de um segundo após a 
+primeira habilidade antes de tentar as outras, ou ela falha.
+-- Ajuste na espera de uso de habilidades. As habilidades sempre terão a Espera ativada ao serem chamadas, pois
+não é possível detectar com precisão quando são usadas com sucesso. Contudo, algumas habilidades de suporte, 
+como Inundação de Magma, têm esse tempo reduzido ou cancelado em algumas ocasiões caso tenha sido detectada 
+falha no uso.
+
+Essa opção ocorre automaticamente para habilidades do Dieter. Mas a Espera pode ser programada para ser 
+cancelada, pelo usuário, em Habilidades.lua, ou alterando valores em Skills.lua.
+
+-- Correção para problema que impedia que homunculus ou assistente seguissem corretamente quando o mestre 
+estava com velocidade aumentada.
+---------------------
+AI Gibraltar vRemake.11.20.10: sub-atualização com correção menor.
+-- Correção de erro de digitação na função de detectar uso de habilidades.
+-- Ajuste para a homunculus Sera não ficar "grudada" no bioquímico tentando usar Analgésico.
+---------------------
+AI Gibraltar vRemake.11.20.11: sub-atualização com correção menor.
+-- Ajuste para o homunculus Dieter usar mais vezes Derretimento com Lava.
+---------------------
+AI Gibraltar vRemake.11.20.12: sub-atualização com correção menor.
+-- Correção de pequeno erro de digitação na função de usar habilidades de área.
+---------------------
+AI Gibraltar vRemake.11.20.15: sub-atualização com correção menor.
+-- Otimização na função de Perseguir dos homunculi e assistentes.
+-- Aprimoramento comportamental no uso de habilidades. Ainda requer testes e novas modificações.
+-- Ajustes para priorização do comando Mover.
+---------------------
+AI Gibraltar vRemake.11.20.17: sub-atualização com correção menor.
+-- Aprimoramento comportamental no uso de habilidades. Ainda requer testes e novas modificações.
+-- Ajustes na priorização de comandos.
+---------------------
+AI Gibraltar vRemake.11.20.18: sub-atualização com correção menor.
+-- Aprimoramentos no sistema anti-lag.
+-- Inversão dos comandos para alterar configurações no jogo:
+--- agora, Aguardar e Aguardar alternam entre o uso automático ou manual de habilidades;
+--- Mover para a posição do jogador enquanto ele está em pé faz com que o homunculus fique atacando 
+de longe, sem perseguir o alvo.
+---------------------
+AI Gibraltar vRemake.11.20.20: sub-atualização com correção menor.
+-- Correção de pequeno problema que impedia o uso correto de habilidades, da versão anterior.
+---------------------
+AI Gibraltar vRemake.11.20.22: sub-atualização com correção menor.
+-- Aprimoramento no uso de habilidades.
+-- Ajustes para impedir que o homunculus se mova sozinho (sem comandos da AI) por causa de Orcs 
+Arqueiros.
+-- Alterações nas chances de uso de habilidades para impedir que algumas habilidades de buff e alta
+demora tivessem 100% de chance caso nenhuma outra fosse utilizada.
+---------------------
+AI Gibraltar vRemake.11.20.24: sub-atualização com correção menor.
+-- Ajustes no modo como o homunculus segue o usuário, para não sair da tela.
+---------------------
+AI Gibraltar vRemake.11.20.25: sub-atualização com correção menor.
+-- Pequena otimização na priorização de comandos do homunculus.
+---------------------
+AI Gibraltar vRemake.11.20.27: sub-atualização com correção menor.
+-- Otimização no modo como homunculus percebe inimigos no modo agressivo.
+---------------------
+AI Gibraltar vRemake.11.21: sub-atualização com correção crítica.
+-- Otimização no modo de uso de habilidades.
+-- Colocado delay global de 100 milissegudos entre comandos de habilidades, para não serem utilizadas 
+imediatamente, evitando vários comandos com a mensagem "Habilidade Falhou".
+-- Ajustado o delay de Capricho, que estava com valores errados.
+---------------------
+AI Gibraltar vRemake.11.31: sub-atualização com correção crítica.
+-- Modificações na movimentação do homunculus para evitar que ele saia da tela por causa de arqueiros.
+---------------------
+AI Gibraltar vRemake.11.35: sub-atualização com correção crítica.
+-- Nova modificação na movimentação do homunculus para evitar que saia da tela por causa do bug com arqueiros.
+-- Aumento no tempo de ignorar novo dano logo após morte do inimigo para o homunculus não adquirir alvos 
+erroneamente, como por exemplo os irritantes Pourings.
+---------------------
+AI Gibraltar vRemake.11.36: sub-atualização com correção crítica.
+-- O comportamento do homunculus como "agressivo para todos" agora ignora os monstros invocados pela Sera. 
+Ou seja, agora não importa a configuração, o homunculus só irá atacar os insetos se eles atacarem o mestre 
+ou o próprio homunculus antes.
+---------------------
+AI Gibraltar vRemake.11.39: sub-atualização com correção crítica.
+-- Correção de erro de carregamento da AI que ocorria na inicialização ao tentar desnecessariamente abrir 
+arquivos usando o método anterior à Renovação (comando antigo 'require').
+-- Correção do sistema de patrulha: homunculus podia ficar se movendo aleatoriamente pelos passos ao invés 
+de seguir a ordem correta.
+-- Alteração de comando: agora a patrulha pode ser desativada ao Mover novamente para a posição do jogador.
+---------------------
+AI Gibraltar vRemake.11.40: sub-atualização com correção menor.
+-- Correção dos textos no manual.
+---------------------
+AI Gibraltar vRemake.11.41: sub-atualização com correção crítica.
+-- Correção no sistema anti-lag, que ainda podia permitir vários comandos ao mesmo tempo.
+---------------------
+AI Gibraltar vRemake.11.42: sub-atualização com correção crítica.
+-- Correção para evitar que o homunculus ataque inimigos passivos, que podia ocorrer em algumas situações.
+---------------------
+AI Gibraltar vRemake.11.44: sub-atualização com correção crítica.
+-- O erro do homunculus atacar inimigos passivos persistiu e está difícil de ser corrigido. Adicionadas mais
+algumas modificações nesta versão.
+-- Adicionadas mais proteções para evitar que o homunculus saia da tela. Mas também é uma correção difícil e
+precisa de mais testes.
+---------------------
+AI Gibraltar vRemake.11.45: sub-atualização com correção crítica.
+-- Adicionado suporte do comando de mover ou ataque reservados para realizarem habilidade de área para a Sera.
+---------------------
+AI Gibraltar vRemake.11.45.1: sub-atualização com correção menor.
+-- Ajuste na função anti-lag para evitar mais algumas situações de sobrecarga de comandos.
+---------------------
+AI Gibraltar vRemake.11.47: sub-atualização com correção crítica.
+-- Otimização nos movimentos do homunculus.
+-- Correção de erros relacionados a gesto de usar habilidades.
+-- Sera vai usar Ponto de Paralisia sempre no nível máximo.
+---------------------
+AI Gibraltar vRemake.11.47.1: sub-atualização com correção menor.
+-- Homunculi S derivados de Lif não vão mais usar Bater em Retirada automaticamente.
+
+VERSÃO REMAKE É OBSOLETA! 
+Veja detalhes da versão atual no começo do arquivo.
